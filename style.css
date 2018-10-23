@@ -1,3 +1,112 @@
 canvas {
   border: 1px solid black;
 }
+
+body {
+  display: flex;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+button.button1 {
+  display: inline-block;
+  background-color: transparent;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #FFFFFF;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto',sans-serif;
+  font-weight: 300;
+  color: #FFFFFF;
+  text-align:center;
+  transition: all 0.2s;
+}
+
+button.button1:hover{
+  color:#000000;
+  background-color:#FFFFFF;
+}
+
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.half {
+  width: 150px;
+  height: 75px;
+}
+
+.quarter {
+  width: 75px;
+  height: 50px;
+}
+
+.top-half {
+  padding: 10px;
+  height: 350px;
+  background-color: #4d88e5;
+  box-sizing: border-box; 
+}
+
+.container-2 {
+  display: flex;
+  flex-direction: row;
+}
+
+.container-4 {
+  display: flex;
+  flex-direction: row;
+}
+
+.red {
+  height: 150px;
+  background-color: red;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  color: white;
+  font-size: 2rem;
+}
+
+.dark-red {
+  height: 75px;
+  background-color: darkred;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  color: white;
+  font-size: 1.6rem;
+}
+
+.black {
+  background-color: black;
+}
+
+.pink {
+  background-color: pink;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.green {
+  background-color: green;
+}

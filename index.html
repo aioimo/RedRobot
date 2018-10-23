@@ -8,14 +8,37 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <canvas id="canvas" width="1200" height="700"></canvas>
-    <button id="play">PLAY</button>
+    <canvas id="canvas" width="1100" height="700"></canvas>
+    <div class="side-bar">
+      <div class="side-bar top-half">     
+         <h1>The Red Robot and the Color Crusades</h1>
+        <button class= "button1" id="play">PLAY LEVEL 1</button>
+        <button class= "button1" id="how-to">HOW TO PLAY</button>
+      </div>
+      <div id="level-1" class="side-bar red">Level 1</div>
+      <div id="level-2" class="side-bar dark-red">Level 2</div>
+      <div class="side-bar container-2">
+          <div class="half black"></div>
+          <div class="half pink"></div>
+      </div>
+
+      <div class="side-bar container-4">
+          <div class="quarter yellow"></div>
+          <div class="quarter orange"></div>
+          <div class="quarter purple"></div>
+          <div class="quarter green"></div>
+      </div>
+        
+      </div>
+   
 
     <!--<button id="move">Move All Computers</button>
     <button id="goUntil">Go Until Winner</button>-->
     
     <script src="js/Players.js"></script>
+    <script src="js/Square.js"></script>
     <script src="js/functions.js"></script>
+    <script src="js/HowToPlay.js"></script>
     <script src="js/levels.js"></script>
     <script src="js/Board.js"></script>
     <script src="js/main.js"></script>

@@ -12,7 +12,7 @@ function matrix(n) {
   for (var i = 0; i < n; i++) {
     var row = [];
     for (var j = 0; j < n; j++) {
-      row.push(null);
+      row.push(new Square());
     }
     matrix.push(row);
   }
@@ -29,6 +29,9 @@ function unionTwoArrays(a,b) {
   }
   return c
 }
+
+
+
 
 function wrapText(ctx,text,x,y,maxWidth,lineHeight) {
   var words = text.split(' ');
@@ -56,25 +59,9 @@ function wrapText(ctx,text,x,y,maxWidth,lineHeight) {
 function matrixContainsNull(matrix){
   for (var row = 0;row<matrix.length;row++){
     for(var col = 0;col<matrix[row].length;col++) {
-      if (matrix[row][col] == null)
+      if (matrix[row][col].color == null)
         return true
     }
   }
   return false
-}
-
-function countTheBoard(matrix){
-  var pink = 0
-  var blue = 0
-  var orange = 0
-  var green = 0;
-  for (var row = 0;row<matrix.length;row++){
-    for(var col = 0;col<matrix[row].length;col++) {
-      if (matrix[row][col] == "pink") pink++;
-      else if (matrix[row][col] == "blue") blue++;
-      else if (matrix[row][col] == "orange") orange++;
-      else if (matrix[row][col] == "green") green++;
-    }
-  }
-  return ["pink: " + pink, "blue: " + blue, "orange: " + orange,"green: " + green]
 }

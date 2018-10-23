@@ -1,6 +1,6 @@
 
 class Game {
-  constructor(ctx, world, humanPlayers, computerPlayers,text) {
+  constructor(ctx, world, humanPlayers, computerPlayers,text, maxDuration = 10) {
     this.ctx = ctx;
     this.world = world;
     this.squareSize = (height-2*yDisplacement)/world.length;
@@ -8,14 +8,15 @@ class Game {
     this.computerPlayers = computerPlayers;
     this.text1 = text;
     this.allPlayers = unionTwoArrays(humanPlayers,computerPlayers);
-    console.log(this.text1);
+    this.maxDuration = maxDuration
   }
 
   start() {
     this.allPlayers.forEach(player => {
-      this.world[player.y][player.x] = player
-      this.draw();
+      this.world[player.y][player.x].addPlayerToSquare(player)
     })
+    this.determineScores();
+    this.draw();
   }
 
   update() {
@@ -23,7 +24,7 @@ class Game {
     this.determineScores();
     this.reorderByScore(this.computerPlayers);
     this.reorderByScore(this.allPlayers);
-
+    this.checkSquares();
     this.draw();
   }
 
@@ -35,10 +36,24 @@ class Game {
     this.start();
   }
 
+  checkSquares() {
+    for (var row = 0; row<this.world.length; row++) {
+      for (var col = 0; col<this.world.length; col++) {
+        let square = this.world[row][col];
+        if (square.color!=null && square.passable) {
+          square.duration++;
+          if (square.duration > 18) {
+            square.passable = false;
+          }
+        }
+      }
+    }
+  }
+
   clearMap() {
     for (var row = 0; row<this.world.length;row++) {
       for (var col = 0; col<this.world[row].length; col++) {
-        this.world[row][col] = null;
+        this.world[row][col] = new Square();      //will have to add more conditions here to clear map
       }
     }
   }
@@ -57,7 +72,7 @@ class Game {
     })
     for (var row = 0; row<this.world.length; row++) {
       for (var col = 0; col<this.world[row].length; col++) {
-        var color = this.world[row][col];
+        var color = this.world[row][col].color;
         var matchingPlayer = this.allPlayers.filter(function(player){
           return player.color === color
         })
@@ -67,10 +82,12 @@ class Game {
     }
   }
 
+
+
   checkGameOver() {
     for (var row = 0; row<this.world.length;row++) {
       for (var col = 0; col<this.world[row].length;col++) {
-        if (this.world[row][col] === null)
+        if (this.world[row][col].color === null)
           return false
       }
     }
@@ -82,25 +99,30 @@ class Game {
   }
 
   draw() {
+    console.log('draw called');
     this.ctx.save();
     this.ctx.clearRect(0,0,width,height);
     for (var row = 0; row<this.world.length; row++) {
       for (var col = 0; col<this.world[row].length; col++) {
-        if (this.world[row][col] === null) {
-          this.drawEmptySquare(row,col);
-        } else if (this.world[row][col] === "red") {
-          this.drawColoredSquare(row,col,"red");
-        } else if (this.world[row][col] === "#009ACD") {
-          this.drawColoredSquare(row,col,"#009ACD");
-        } else if (this.world[row][col] === "green") {
-          this.drawColoredSquare(row,col,"green");
-        } else if (this.world[row][col] === "orange") {
-          this.drawColoredSquare(row,col,"orange");
-        } else if (this.world[row][col] === "pink") {
-          this.drawColoredSquare(row,col,"pink");
-        } else if (this.world[row][col] instanceof Player) {
+        console.log('this.world[row][col].occupyingPlayer instanceof Player', this.world[row][col].occupyingPlayer instanceof Player)
+        if (this.world[row][col].occupyingPlayer instanceof Player) {
           this.drawEmptySquare(row,col);
           this.drawCharacter(row,col);
+        } else if (this.world[row][col].color === null){
+          this.drawEmptySquare(row,col);
+        } else if (this.world[row][col].color === "red") {
+          this.drawColoredSquare(row,col,"red");
+        } else if (this.world[row][col].color === "#009ACD") {
+          this.drawColoredSquare(row,col,"#009ACD");
+        } else if (this.world[row][col].color === "green") {
+          this.drawColoredSquare(row,col,"green");
+        } else if (this.world[row][col].color === "orange") {
+          this.drawColoredSquare(row,col,"orange");
+        } else if (this.world[row][col].color === "pink") {
+          this.drawColoredSquare(row,col,"pink");
+        }
+        if (!this.world[row][col].passable) {
+          this.drawImpassableSquare(row,col);
         }
       }
     }
@@ -112,7 +134,7 @@ class Game {
   drawEmptySquare(row,col){
     this.ctx.save()
     this.ctx.strokeStyle="RGBA(0,0,0,0.3)"
-    this.ctx.translate(xDisplacement+this.squareSize*col,yDisplacement+this.squareSize*row);
+    this.ctx.translate(gameBoardXDisplacement+this.squareSize*col,yDisplacement+this.squareSize*row);
     this.ctx.strokeRect(0,0,this.squareSize,this.squareSize);
     this.ctx.restore();
   }
@@ -121,16 +143,32 @@ class Game {
     this.ctx.save()
     this.ctx.fillStyle=color;
     this.ctx.strokeStyle = "white";
-    this.ctx.translate(xDisplacement+this.squareSize*col,yDisplacement+this.squareSize*row);
+    this.ctx.translate(gameBoardXDisplacement+this.squareSize*col,yDisplacement+this.squareSize*row);
     this.ctx.fillRect(0,0,this.squareSize,this.squareSize);
     this.ctx.strokeRect(0,0,this.squareSize,this.squareSize);
     this.ctx.restore();
   }
 
+  drawImpassableSquare(row,col) {
+    this.ctx.save();
+    this.ctx.strokeStyle = "yellow";
+    this.ctx.lineWidth = 6;
+    this.ctx.translate(gameBoardXDisplacement+this.squareSize*col,yDisplacement+this.squareSize*row);
+    this.ctx.strokeRect(0,0,this.squareSize,this.squareSize);
+    this.ctx.restore();
+  }
+
+  //
+  //var gameBoardgameBoardXDisplacement = 200;
+  //var gameBoardYDisplacement = yDisplacement;
+
+
   drawCharacter(row,col){
+    console.log("draw character called")
     this.ctx.save()
-    this.ctx.translate(xDisplacement+this.squareSize*col,yDisplacement+this.squareSize*row);
-    this.ctx.drawImage(this.world[row][col].img,col,row,this.squareSize,this.squareSize)
+    this.ctx.translate(gameBoardXDisplacement+this.squareSize*col,yDisplacement+this.squareSize*row);
+    console.log('this.world[row][col].occupyingPlayer.img', this.world[row][col].occupyingPlayer.img)
+    this.ctx.drawImage(this.world[row][col].occupyingPlayer.img,col,row,this.squareSize,this.squareSize)
     this.ctx.restore();
   }
 
@@ -142,7 +180,8 @@ class Game {
 
   drawScoreBoard() {
     this.ctx.save();
-    this.ctx.translate(this.ctx.canvas.width-200,50);
+    // this.ctx.translate(this.ctx.canvas.width-200,50);
+    this.ctx.translate(xDisplacement,yDisplacement);
     this.ctx.fillStyle = "black";
     this.ctx.font = '24px serif'
     for (var i = 0; i<this.allPlayers.length;i++) {
@@ -155,17 +194,18 @@ class Game {
 
   drawStatusTextBox() {
     this.ctx.save();
-    var textBoxWidth = width-height-2*xDisplacement;
+    var textBoxWidth = width-height-xDisplacement;
     var textBoxHeight = height/2-yDisplacement;
     if(this.checkGameOver()) {
       this.text1 = "Game Over -- Winner is:      " + this.allPlayers[0].name
     }
-    this.ctx.translate((height+xDisplacement), height/2);
+    // this.ctx.translate(height, height/2);
+    this.ctx.translate(xDisplacement,height/2);
     this.ctx.fillStyle = "black";
-    this.ctx.font = '24px serif'
+    this.ctx.font = '16px sans-serif'
     this.ctx.fillRect(0,0,textBoxWidth,textBoxHeight);
     this.ctx.fillStyle = "white";
-    wrapText(this.ctx,this.text1,10,50,400,25)
+    wrapText(this.ctx,this.text1,10,50,textBoxWidth,25)
     this.ctx.restore();
   }
 
