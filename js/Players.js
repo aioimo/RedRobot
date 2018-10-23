@@ -14,6 +14,7 @@ class Player {
 
   //determines point value of a given space 
   evaluateCoordinate(y,x) {  
+    console.log("evalue coordinate called from Player");
     if (y < 0 || x < 0 || game.world.length-1 < y || game.world.length-1 < x) return -1 
     if (game.world[y][x] instanceof Player) return -1 
     if (typeof game.world[y][x] == "string" && game.world[y][x] != this.color) return 5
@@ -116,13 +117,50 @@ class EasyAI extends AIPlayer {
   }
 
   evaluateCoordinate(y,x) {  
-    if (y < 0 || x < 0 || game.world.length-1 < y || game.world.length-1 < x) return -1 
-    if (game.world[y][x] instanceof Player) return -1 
-    if (typeof game.world[y][x] == "string" && game.world[y][x] != this.color) return 1
-    if (game.world[y][x] == null) return 1
-     //if game.world[y][x] == own color --> return 1
-    else return 1
+    console.log("evalue coordinate Easy AI called")
+    if (y < 0 || x < 0 || game.world.length-1 < y || game.world.length-1 < x) {
+      return -1 
+    } else if (game.world[y][x] instanceof Player) {
+      return -1
+    } else if (typeof game.world[y][x] == "string" && game.world[y][x] != this.color) {
+      return 1
+    } else if (game.world[y][x] == null) {
+      return 1
+    } else return 1
   }
+}
+
+class FairAI extends AIPlayer {
+  constructor(name, color, src="", x=0, y=0) {
+    super(name,color, src,x,y);
+  }
+
+  evaluateCoordinate(y,x) {
+    console.log("evalue coordinate Fair AI called")
+    if (y < 0 || x < 0 || game.world.length-1 < y || game.world.length-1 < x) return -1 
+    if (game.world[y][x] instanceof Player) return -1
+    if (typeof game.world[y][x] == "string") {
+      if (this.checkIfOwnColor(game.world[y][x])) {
+        return 1    //stepping on own color is least preferred
+      } else if (this.checkIfLeadingPlayersColor(game.world[y][x])) {
+        return 5    //stepping on the leader's color is most preferred
+      } else {
+        return 3    //stepping on anohter player (who isn's leader) is second preferred
+      }
+    }
+    if (game.world[y][x] == null) return 2
+   return 1
+  }
+
+  checkIfLeadingPlayersColor(color) {
+    console.log(this.name, "thinks", game.allPlayers[0], "is in the lead")
+    return game.allPlayers[0].color === color
+  }
+
+  checkIfOwnColor(color) {
+    return this.color === color;
+  }
+
 }
 
 

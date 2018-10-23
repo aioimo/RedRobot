@@ -63,7 +63,7 @@ playButton.onclick = function() {
   if (game != undefined) game.reset();
   setRestartBtn();
   console.log(levels[levelCounter].map,levels[levelCounter].humanPlayer,levels[levelCounter].computerOpponents)
-  game = new Game(ctx,levels[levelCounter].map,levels[levelCounter].humanPlayer,levels[levelCounter].computerOpponents);
+  game = new Game(ctx,levels[levelCounter].map,levels[levelCounter].humanPlayer,levels[levelCounter].computerOpponents, levels[levelCounter].starterText);
   game.start();
   window.addEventListener('keydown',playerMovement);
 }

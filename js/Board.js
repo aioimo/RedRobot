@@ -1,12 +1,14 @@
 
 class Game {
-  constructor(ctx, world, humanPlayers, computerPlayers) {
+  constructor(ctx, world, humanPlayers, computerPlayers,text) {
     this.ctx = ctx;
     this.world = world;
     this.squareSize = (height-2*yDisplacement)/world.length;
     this.humanPlayers = humanPlayers;
     this.computerPlayers = computerPlayers;
+    this.text1 = text;
     this.allPlayers = unionTwoArrays(humanPlayers,computerPlayers);
+    console.log(this.text1);
   }
 
   start() {
@@ -148,12 +150,6 @@ class Game {
       var text = this.allPlayers[i].name + ": " + this.allPlayers[i].score
       this.ctx.fillText(text, 5, i*60 + 30)
     }
-    if(this.checkGameOver()) {
-      this.ctx.fillText("Game Over",5,(i+1)*60 + 30);
-      this.ctx.fillText("Winner is: ",5,(i+2)*60 + 30);
-      var winnerText = this.allPlayers[0].name
-      this.ctx.fillText(winnerText,5,(i+3)*60 +30)
-    }
     this.ctx.restore();
   }
 
@@ -161,13 +157,15 @@ class Game {
     this.ctx.save();
     var textBoxWidth = width-height-2*xDisplacement;
     var textBoxHeight = height/2-yDisplacement;
+    if(this.checkGameOver()) {
+      this.text1 = "Game Over -- Winner is:      " + this.allPlayers[0].name
+    }
     this.ctx.translate((height+xDisplacement), height/2);
     this.ctx.fillStyle = "black";
     this.ctx.font = '24px serif'
     this.ctx.fillRect(0,0,textBoxWidth,textBoxHeight);
-    var text = levels[levelCounter].starterText;
     this.ctx.fillStyle = "white";
-    wrapText(this.ctx,text,10,50,400,25)
+    wrapText(this.ctx,this.text1,10,50,400,25)
     this.ctx.restore();
   }
 
