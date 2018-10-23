@@ -10,11 +10,35 @@ class Game {
   }
 
   start() {
-    this.reset();
     this.allPlayers.forEach(player => {
       this.world[player.y][player.x] = player
       this.draw();
     })
+  }
+
+  update() {
+    this.moveAllComps();
+    this.determineScores();
+    this.reorderByScore(this.computerPlayers);
+    this.reorderByScore(this.allPlayers);
+
+    this.draw();
+  }
+
+  reset() {
+    this.allPlayers.forEach(player => {
+      player.reset();
+    })
+    this.clearMap();
+    this.start();
+  }
+
+  clearMap() {
+    for (var row = 0; row<this.world.length;row++) {
+      for (var col = 0; col<this.world[row].length; col++) {
+        this.world[row][col] = null;
+      }
+    }
   }
 
   moveAllComps() {
@@ -23,25 +47,6 @@ class Game {
       comp.lookAround();
       comp.executeMove(comp.determineBestMove())
     }
-  }
-
-  update() {
-    this.moveAllComps();
-    this.determineScores();
-    this.reorderByScore(this.computerPlayers);
-    this.reorderByScore(this.allPlayers);
-    this.draw();
-  }
-
-  reset() {
-   
-    this.world = levels[0].map
-    console.log(this.world)
-    this.computerPlayers = levels[0].computerOpponents
-    console.log(this.computerPlayers)
-    this.humanPlayers = levels[0].humanPlayer
-    this.allPlayers = unionTwoArrays(this.humanPlayers,this.computerPlayers);
-    this.draw();
   }
 
   determineScores() {
@@ -70,6 +75,10 @@ class Game {
     return true
   }
 
+  checkRedRobotWin() {
+    return this.checkGameOver() && this.allPlayers[0].name === "Red Robot"
+  }
+
   draw() {
     this.ctx.save();
     this.ctx.clearRect(0,0,width,height);
@@ -94,6 +103,7 @@ class Game {
       }
     }
     this.drawScoreBoard();
+    this.drawStatusTextBox();
     this.ctx.restore();
   }
 
@@ -146,7 +156,25 @@ class Game {
     }
     this.ctx.restore();
   }
+
+  drawStatusTextBox() {
+    this.ctx.save();
+    var textBoxWidth = width-height-2*xDisplacement;
+    var textBoxHeight = height/2-yDisplacement;
+    this.ctx.translate((height+xDisplacement), height/2);
+    this.ctx.fillStyle = "black";
+    this.ctx.font = '24px serif'
+    this.ctx.fillRect(0,0,textBoxWidth,textBoxHeight);
+    var text = levels[levelCounter].starterText;
+    this.ctx.fillStyle = "white";
+    wrapText(this.ctx,text,10,50,400,25)
+    this.ctx.restore();
+  }
+
 }
+
+
+/*
 
 class GameBoard {
   constructor(ctx, size){
@@ -288,3 +316,5 @@ class GameBoard {
   }
 
 }
+
+*/

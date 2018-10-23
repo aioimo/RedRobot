@@ -1,9 +1,11 @@
 class Player {
-  constructor() {
+  constructor(x = 0, y = 0) {
     console.log("contructor Player called")
     this.name = "Red Robot";
-    this.x = 0;
-    this.y = 0;
+    this.x = x;
+    this.y = y;
+    this.startingX = x;
+    this.startingY = y;
     this.color = "red";
     this.score = 0;
     this.img = new Image();
@@ -54,6 +56,14 @@ class Player {
     this.y += 1;
   }
 
+
+  reset() {
+    this.x = this.startingX;
+    this.y = this.startingY;
+    this.score = 0;
+    
+  }
+
 }
 
 class AIPlayer extends Player {
@@ -63,6 +73,8 @@ class AIPlayer extends Player {
     this.color = color;
     this.x = x;
     this.y = y;
+    this.startingX = x;
+    this.startingY = y;
     this.img = new Image();
     this.img.src = src
     this.nextPossibleMoves = {north: 0, east: 0, west: 0, south: 0, stay: 0}
@@ -88,7 +100,32 @@ class AIPlayer extends Player {
     let r = Math.floor(Math.random()*bestMoves.length)
     return bestMoves[r]
   }
+
+  reset() {
+    this.x = this.startingX;
+    this.y = this.startingY;
+    this.score = 0;
+    this.nextPossibleMoves = {north: 0, east: 0, west: 0, south: 0, stay: 0}
+  }
+
 }
+
+class EasyAI extends AIPlayer {
+  constructor(name, color, src="", x=0, y=0) {
+    super(name,color, src,x,y);
+  }
+
+  evaluateCoordinate(y,x) {  
+    if (y < 0 || x < 0 || game.world.length-1 < y || game.world.length-1 < x) return -1 
+    if (game.world[y][x] instanceof Player) return -1 
+    if (typeof game.world[y][x] == "string" && game.world[y][x] != this.color) return 1
+    if (game.world[y][x] == null) return 1
+     //if game.world[y][x] == own color --> return 1
+    else return 1
+  }
+}
+
+
 /*
 
 class Player {

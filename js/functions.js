@@ -30,6 +30,24 @@ function unionTwoArrays(a,b) {
   return c
 }
 
+function wrapText(ctx,text,x,y,maxWidth,lineHeight) {
+  var words = text.split(' ');
+  var line = '';
+  for(var i = 0; i<words.length; i++) {
+    var testLine = line + words[i] + ' ';
+    var metrics = ctx.measureText(testLine);
+    var testWidth = metrics.width;
+    if (testWidth > maxWidth && i>0){
+      ctx.fillText(line,x,y);
+      line = words[i] + ' ';
+      y += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line,x,y);
+}
+
 
 //var player = new Player();
 //addPlayerToMap(player);
