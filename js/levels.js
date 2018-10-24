@@ -6,8 +6,8 @@ var levels =
     map: matrix(7),
     humanPlayer: [new Player("#A5243D")],
     computerOpponents: [
-      new EasyAI('Blue Bear',"#17BEBB","../images/blueBear.jpg", 0,4),
-      new EasyAI("Puce Peacock", "#4B1D3F", "../images/pinkPeacock.png", 4,4),
+      new EasyAI('Raven',"#17BEBB","../images/raven.png", 0,4),
+      new EasyAI("Kangaroo Rat", "#4B1D3F", "../images/kangarooRat.png", 4,4),
       new EasyAI('Pigeon',"#0E7C7B", "../images/pigeonSquare.png", 4,0)
     ],
     maximumDuration: 20,
@@ -36,8 +36,8 @@ var levels =
     map: matrix(9),
     humanPlayer: [new Player('#DE3C4B')],
     computerOpponents: [
-      new EasyAI('Fish 1',"#FFBA49", "../images/fishColorful.png", 4,4),
-      new EasyAI('Fish 2',"#FFBA49","../images/fishYellow.png", 3,3),
+      new EasyAI('Fish 1',"#FFBA49", "../images/fishColorful.png", 5,5),
+      new EasyAI('Fish 2',"#FFBA49","../images/fishYellow.png", 6,6),
     ],
     maximumDuration: 10,
     starterText: "Round 3 – 2 against 1",

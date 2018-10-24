@@ -10,7 +10,7 @@ var yDisplacement = 30;
 var gameBoardXDisplacement = width-height+xDisplacement;
 var gameBoardYDisplacement = yDisplacement;
 
-var levelCounter = 4;
+var levelCounter = 0;
 var game;
 
 
