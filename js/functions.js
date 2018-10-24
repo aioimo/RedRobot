@@ -30,6 +30,11 @@ function unionTwoArrays(a,b) {
   return c
 }
 
+function isArrayAinB(a,b) {
+  var stringifiedA = JSON.stringify(a)
+  var stringifiedB = JSON.stringify(b)
+  return stringifiedB.indexOf(stringifiedA) > -1
+}
 
 
 

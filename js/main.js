@@ -87,9 +87,8 @@ var playerMovement = function(e) {
       game.update(); 
     }
   } 
-  if (game.checkRedRobotWin()) {
-    levelCounter++;
-    setPlayBtn();
+  while (!game.humanPlayers[0].connected && !game.checkGameOver()){
+    game.update();
   }
 }
 
@@ -97,6 +96,7 @@ playButton.onclick = function() {
   if (game != undefined) game.reset();
   setRestartBtn();
   game = new Game(ctx,levels[levelCounter].map,levels[levelCounter].humanPlayer,levels[levelCounter].computerOpponents, levels[levelCounter].starterText, levels[levelCounter].maximumDuration,levels[levelCounter].scoreBoardColor, levels[levelCounter].backgroundColor);
+  var robot = game.humanPlayers[0]
   game.start();
   window.addEventListener('keydown',playerMovement);
 }

@@ -27,7 +27,12 @@ class Game {
     this.reorderByScore(this.computerPlayers);
     this.reorderByScore(this.allPlayers);
     this.checkSquares();
+    this.checkAllPlayersConnected()
     this.draw();
+    if (game.checkRedRobotWin()) {
+      levelCounter++;
+      setPlayBtn();
+    }
   }
 
   reset() {
@@ -63,8 +68,10 @@ class Game {
   moveAllComps() {
     for (var i = 0; i<this.computerPlayers.length;i++) {
       let comp = this.computerPlayers[i];
-      comp.lookAround();
-      comp.executeMove(comp.determineBestMove())
+      if (comp.connected) {
+        comp.lookAround();
+        comp.executeMove(comp.determineBestMove())
+      }
     }
   }
 
@@ -87,9 +94,24 @@ class Game {
     }
   }
 
-
+  checkAllPlayersConnected() {
+    this.allPlayers.forEach(function(player){
+      if (player.connected) {
+        player.connected = player.isConnected();
+        if (!player.connected) {
+          console.log(player.name, 'is not connected');
+        }
+      }
+    })
+  }
 
   checkGameOver() {
+    console.log("no more empty spaces", this.noMoreEmptySpaces())
+    console.log("No players connected", this.noPlayersConnected())
+    return this.noMoreEmptySpaces() || this.noPlayersConnected();
+  }
+
+  noMoreEmptySpaces() {
     for (var row = 0; row<this.world.length;row++) {
       for (var col = 0; col<this.world[row].length;col++) {
         if (this.world[row][col].color === null)
@@ -99,19 +121,26 @@ class Game {
     return true
   }
 
+  noPlayersConnected() {
+    var noOneConnected = true;
+    this.allPlayers.forEach(function(player){
+      console.log("connected?", player.name, player.connected)
+      if (player.connected) noOneConnected = false;
+    })
+    return noOneConnected
+  }
+
   checkRedRobotWin() {
     return this.checkGameOver() && this.allPlayers[0].name === "Red Robot"
   }
 
   draw() {
-    console.log('draw called');
     this.ctx.save();
     this.ctx.clearRect(0,0,width,height);
     this.ctx.fillStyle = this.backgroundColor;
     this.ctx.fillRect(0,0,width,height);
     for (var row = 0; row<this.world.length; row++) {
       for (var col = 0; col<this.world[row].length; col++) {
-        console.log('this.world[row][col].occupyingPlayer instanceof Player', this.world[row][col].occupyingPlayer instanceof Player)
         if (this.world[row][col].occupyingPlayer != null) {
           this.drawEmptySquare(row,col);
           this.drawCharacter(row,col);
@@ -137,7 +166,6 @@ class Game {
   }
 
   drawBorderAroundBoard() {
-    console.log("drawborder called");
     this.ctx.save();
     this.ctx.translate(gameBoardXDisplacement,yDisplacement);
     this.ctx.strokeStyle = "black";

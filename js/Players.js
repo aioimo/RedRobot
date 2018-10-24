@@ -1,6 +1,5 @@
 class Player {
   constructor(color="red", x = 0, y = 0) {
-    console.log("contructor Player called")
     this.name = "Red Robot";
     this.x = x;
     this.y = y;
@@ -10,6 +9,7 @@ class Player {
     this.score = 0;
     this.img = new Image();
     this.img.src = "../images/redRobotTransparent.png"
+    this.connected = true;
   }
 
   //determines point value of a given space 
@@ -67,6 +67,7 @@ class Player {
     this.x = this.startingX;
     this.y = this.startingY;
     this.score = 0;
+    this.connected = true;
     
   }
 
@@ -86,9 +87,86 @@ class Player {
     return square.color === null
   }
 
+  isPassable(y,x) {
+    if (y < 0 || x < 0 || y > game.world.length - 1 || x > game.world.length - 1) {   
+      return false
+    } else if (game.world[y][x].occupyingPlayer != null) {
+      return true
+    } else if (game.world[y][x].passable === false) {
+      return false
+    } else {
+      return true
+    }
+  }
 
+  isConnected() {
+    var toCheck = [[this.y,this.x+1],[this.y+1,this.x],[this.y,this.x-1],[this.y-1,this.x]];
+    var checked = [];
+    while (toCheck.length > 0) {
+      var nextToCheck = toCheck.pop();
+      checked.push(nextToCheck);
+      var currentY = nextToCheck[0]
+      var currentX = nextToCheck[1]
+      if (!this.isPassable(currentY,currentX)) {
+        continue;
+      } else if (game.world[currentY][currentX].color === null) {
+        return true
+      } else {
+        if (!isArrayAinB([currentY,currentX +1],checked)) {
+          toCheck.push([currentY,currentX +1])
+        }
+        if (!isArrayAinB([currentY+1,currentX],checked)) {
+          toCheck.push([currentY+1,currentX])
+        }
+        if (!isArrayAinB([currentY-1,currentX],checked)) {
+          toCheck.push([currentY-1,currentX])
+        }
+        if (!isArrayAinB([currentY,currentX-1],checked)) {
+          toCheck.push([currentY,currentX-1])
+        }  
+      }
+    }
+    return false
+  }  
 
 }
+  //   console.log(toCheck);
+  //   var notPassable = [];
+  //   if (!this.isPassable(y,x+1) && !this.isPassable(y+1,x) && !this.isPassable(y,x-1) && !this.isPassable(y-1,x)) {
+  //     return false
+  //   } else if (game.world[y][x+1]===null || game.world[y+1][x]===null||game.world[y][x-1]===null|| game.world[y-1][x]===null) {
+  //     return true
+  //   } else {
+  //     if (toCheck.includes([y,y+1]) || !this.isPassable(y,x+1)) {
+  //       notPassable.push([y,x+1]);
+  //     } else {
+  //       toCheck.push([y,x+1]);
+  //     }
+  //     if (toCheck.includes([y+1,x]) || !this.isPassable(y+1,x)) {
+  //       notPassable.push([y+1,x]);
+  //     } else {
+  //       toCheck.push([y+1,x]);
+  //     }
+  //     if (toCheck.includes([y,x-1]) || !this.isPassable(y,x-1)) {
+  //       notPassable.push([y,x-1]);
+  //     } else {
+  //       toCheck.push([y,x-1]);
+  //     }
+  //     if (toCheck.includes([y-1,x]) || !this.isPassable(y-1,x)) {
+  //       notPassable.push([y-1,x]);
+  //     } else {
+  //       toCheck.push([y-1,x]);
+  //     }
+  //   }
+  //   console.log(toCheck);
+  //   while (toCheck.length > 0) {
+  //     var nextToCheck = toCheck.pop();
+  //     console.log("next to check:", nextToCheck);
+  //     return this.isConnected(nextToCheck[0],nextToCheck[1])
+  //   }
+  //   return false
+  // }
+
 
 class AIPlayer extends Player {
   constructor(name, color, src="", x=0, y=0) {
@@ -113,6 +191,26 @@ class AIPlayer extends Player {
     this.nextPossibleMoves.west = this.evaluateCoordinate(this.y,this.x-1)
   }
 
+    //determines point value of a given space 
+  evaluateCoordinate(y,x) {  
+    if (y < 0 || x < 0 || game.world.length-1 < y || game.world.length-1 < x || !game.world[y][x].passable) {
+      return -1 
+    }
+
+    let r = Math.random();
+
+    //Square does not belong to an opponent.
+    if (this.checkIfBlank(game.world[y][x]) && r > 0.925) return 8
+    if (this.checkIfBlank(game.world[y][x])) return 2
+    if (this.checkIfOwnColor(game.world[y][x])) return 1
+
+    //Square belongs to an opponent.
+    let durationQuotient = game.world[y][x].duration / game.maxDuration
+    if (this.checkIfLeadingPlayersColor(game.world[y][x])) return 5 + durationQuotient
+    if (this.checkIfOpponentsColor(game.world[y][x])) return 5 + durationQuotient
+    else return 1
+  }
+
 
   //Looks in nextPossibleMoves object 
   //and returns the best move (randomly breaks ties)
@@ -129,6 +227,7 @@ class AIPlayer extends Player {
     this.x = this.startingX;
     this.y = this.startingY;
     this.score = 0;
+    this.connected = true;
     this.nextPossibleMoves = {north: 0, east: 0, west: 0, south: 0, stay: 0}
   }
 
@@ -160,6 +259,10 @@ class FairAI extends AIPlayer {
     if (y < 0 || x < 0 || game.world.length-1 < y || game.world.length-1 < x || !game.world[y][x].passable) {
       return -1 
     }
+
+    let r = Math.random();
+
+    if (this.checkIfBlank(game.world[y][x]) && r > 0.925) return 8
     if (this.checkIfBlank(game.world[y][x])) return 2
     if (this.checkIfOwnColor(game.world[y][x])) return 1
     if (this.checkIfLeadingPlayersColor(game.world[y][x])) return 5
