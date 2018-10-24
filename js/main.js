@@ -10,7 +10,7 @@ var yDisplacement = 30;
 var gameBoardXDisplacement = width-height+xDisplacement;
 var gameBoardYDisplacement = yDisplacement;
 
-var levelCounter = 0;
+var levelCounter = 1;
 var game;
 
 
@@ -87,7 +87,7 @@ playButton.onclick = function() {
   if (game != undefined) game.reset();
   setRestartBtn();
   console.log(levels[levelCounter].map,levels[levelCounter].humanPlayer,levels[levelCounter].computerOpponents)
-  game = new Game(ctx,levels[levelCounter].map,levels[levelCounter].humanPlayer,levels[levelCounter].computerOpponents, levels[levelCounter].starterText, levels[levelCounter].maximumDuration);
+  game = new Game(ctx,levels[levelCounter].map,levels[levelCounter].humanPlayer,levels[levelCounter].computerOpponents, levels[levelCounter].starterText, levels[levelCounter].maximumDuration,levels[levelCounter].scoreBoardColor, levels[levelCounter].backgroundColor);
   game.start();
   window.addEventListener('keydown',playerMovement);
 }

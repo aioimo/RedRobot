@@ -1,5 +1,5 @@
-canvas {
-  border: 1px solid black;
+html {
+  font-family: sans-serif;
 }
 
 body {
@@ -25,6 +25,8 @@ button.button1 {
   color: #FFFFFF;
   text-align:center;
   transition: all 0.2s;
+  height: 40px;
+  margin-top: 20px;
 }
 
 button.button1:hover{
@@ -51,7 +53,7 @@ button.button1:hover{
 .top-half {
   padding: 10px;
   height: 350px;
-  background-color: #4d88e5;
+  background-color: #3D2B3D;
   box-sizing: border-box; 
 }
 
@@ -65,20 +67,23 @@ button.button1:hover{
   flex-direction: row;
 }
 
-.red {
-  height: 150px;
-  background-color: red;
+.level {
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-around;
   color: white;
+}
+
+.red {
+  height: 150px;
+  background-color:#9B1D20;
   font-size: 2rem;
 }
 
 .dark-red {
   height: 75px;
-  background-color: darkred;
+  background-color: #D34E24;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -96,17 +101,17 @@ button.button1:hover{
 }
 
 .yellow {
-  background-color: yellow;
+  background-color: #D8D78F;
 }
 
 .orange {
-  background-color: orange;
+  background-color: #635D5C;
 }
 
 .purple {
-  background-color: purple;
+  background-color: #9D5C63;
 }
 
 .green {
-  background-color: green;
+  background-color: #F3B3A6;
 }

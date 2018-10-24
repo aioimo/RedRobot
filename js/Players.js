@@ -1,12 +1,12 @@
 class Player {
-  constructor(x = 0, y = 0) {
+  constructor(color="red", x = 0, y = 0) {
     console.log("contructor Player called")
     this.name = "Red Robot";
     this.x = x;
     this.y = y;
     this.startingX = x;
     this.startingY = y;
-    this.color = "red";
+    this.color = color;
     this.score = 0;
     this.img = new Image();
     this.img.src = "../images/redRobot.jpg"
@@ -86,6 +86,8 @@ class Player {
     return square.color === null
   }
 
+
+
 }
 
 class AIPlayer extends Player {
@@ -158,7 +160,7 @@ class FairAI extends AIPlayer {
     if (y < 0 || x < 0 || game.world.length-1 < y || game.world.length-1 < x || !game.world[y][x].passable) {
       return -1 
     }
-    if (this.checkIfBlank(game.world[y][x]) == null) return 2
+    if (this.checkIfBlank(game.world[y][x])) return 2
     if (this.checkIfOwnColor(game.world[y][x])) return 1
     if (this.checkIfLeadingPlayersColor(game.world[y][x])) return 5
     if (this.checkIfOpponentsColor(game.world[y][x])) return 3
