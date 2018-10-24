@@ -20,28 +20,28 @@ var levels =
     map: matrix(6),
     humanPlayer: [new Player("#FF0000")],
     computerOpponents: [
-      new EasyAI('blue bear',"#EF8A17","../images/blueBear.jpg", 2,1),
+      new EasyAI('blue bear',"#EF8A17","../images/blueBear.jpg", 4,1),
       new AIPlayer('green gorilla',"#C6C013", "../images/greenGorilla.png", 5,5),
-      new EasyAI("pink peacock", "#087F8C", "../images/pinkPeacock.png", 3,4),
+      new EasyAI("pink peacock", "#242F40", "../images/pinkPeacock.png", 1,4),
     ],
     maximumDuration: 18,
     starterText: "Round 2 -- The other plays are a little smarter now. Just a little.",
-    scoreBoardColor: "#242F40",
+    scoreBoardColor: "#087F8C",
     backgroundColor: "white"
   },
 
 
   {
     level: 3,     //2 v. 1
-    map: matrix(8),
-    humanPlayer: [new Player()],
+    map: matrix(9),
+    humanPlayer: [new Player('#DE3C4B')],
     computerOpponents: [
-      new EasyAI('green gorilla',"green", "../images/greenGorilla.png", 4,4),
-      new EasyAI('blue bear',"green","../images/blueBear.jpg", 3,3),
+      new EasyAI('Fish 1',"#FFBA49", "../images/fishColorful.png", 4,4),
+      new EasyAI('Fish 2',"#FFBA49","../images/fishYellow.png", 3,3),
     ],
     maximumDuration: 10,
     starterText: "Round 3 – 2 against 1",
-    scoreBoardColor: "#black",
+    scoreBoardColor: "#23001E",
     backgroundColor: "white"
   },
   {
@@ -68,8 +68,64 @@ var levels =
       new FairAI("pink peacock", "pink", "../images/pinkPeacock.png", 13,0),
     ],
     maximumDuration: 12,
-    starterText: "Round 3!! The fight continues...",
-    scoreBoardColor: "#black",
+    starterText: "Round 5!! The fight continues...",
+    scoreBoardColor: "black",
+    backgroundColor: "white"
+  },
+  {
+    level: 6,
+    map: matrix(14),
+    humanPlayer: [new Player()],
+    computerOpponents: [
+      new FairAI('blue bear',"#009ACD","../images/blueBear.jpg", 13,13),
+      new FairAI('green gorilla',"green", "../images/greenGorilla.png", 0,13),
+      new FairAI("pink peacock", "pink", "../images/pinkPeacock.png", 13,0),
+    ],
+    maximumDuration: 12,
+    starterText: "Round 6!! The fight continues...",
+    scoreBoardColor: "black",
+    backgroundColor: "white"
+  },
+  {
+    level: 7,
+    map: matrix(14),
+    humanPlayer: [new Player()],
+    computerOpponents: [
+      new FairAI('blue bear',"#009ACD","../images/blueBear.jpg", 13,13),
+      new FairAI('green gorilla',"green", "../images/greenGorilla.png", 0,13),
+      new FairAI("pink peacock", "pink", "../images/pinkPeacock.png", 13,0),
+    ],
+    maximumDuration: 12,
+    starterText: "Round 7!! The fight continues...",
+    scoreBoardColor: "black",
+    backgroundColor: "white"
+  },
+  {
+    level: 8,
+    map: matrix(14),
+    humanPlayer: [new Player()],
+    computerOpponents: [
+      new FairAI('blue bear',"#009ACD","../images/blueBear.jpg", 13,13),
+      new FairAI('green gorilla',"green", "../images/greenGorilla.png", 0,13),
+      new FairAI("pink peacock", "pink", "../images/pinkPeacock.png", 13,0),
+    ],
+    maximumDuration: 12,
+    starterText: "Round 8!! The fight continues...",
+    scoreBoardColor: "black",
+    backgroundColor: "white"
+  },
+  {
+    level: 9,
+    map: matrix(14),
+    humanPlayer: [new Player()],
+    computerOpponents: [
+      new FairAI('blue bear',"#009ACD","../images/blueBear.jpg", 13,13),
+      new FairAI('green gorilla',"green", "../images/greenGorilla.png", 0,13),
+      new FairAI("pink peacock", "pink", "../images/pinkPeacock.png", 13,0),
+    ],
+    maximumDuration: 12,
+    starterText: "Round 9!! This one is really hard.",
+    scoreBoardColor: "black",
     backgroundColor: "white"
   }
 ]

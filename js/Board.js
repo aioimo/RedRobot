@@ -78,8 +78,11 @@ class Game {
         var matchingPlayer = this.allPlayers.filter(function(player){
           return player.color === color
         })
-        if (matchingPlayer.length > 0)
-          matchingPlayer[0].score += 1;
+        if (matchingPlayer.length > 0) {
+          matchingPlayer.forEach(function(player){
+            player.score += 1;
+          })
+        }
       }
     }
   }
@@ -200,7 +203,7 @@ class Game {
   drawStatusTextBox() {
     this.ctx.save();
     var textBoxWidth = width-height - xDisplacement;
-    var textBoxHeight = height/2-yDisplacement;
+    var textBoxHeight = height/2-2*yDisplacement;
     if(this.checkGameOver()) {
       this.text1 = "Game Over -- Winner is:      " + this.allPlayers[0].name
     }
@@ -216,8 +219,10 @@ class Game {
   drawScoreBoard() {
     this.ctx.save();
     this.ctx.translate(xDisplacement,yDisplacement);
+    let indent = 30;
+    this.drawOvalShape(0,0);
     for (var i = 0; i<this.allPlayers.length;i++) {
-      this.drawScorePanel(0,i*60,this.allPlayers[i]);
+      this.drawScorePanel(0,60+i*60,this.allPlayers[i]);
     }
     this.ctx.restore();
   }
@@ -240,20 +245,44 @@ class Game {
     this.ctx.restore();
   }
 
+  drawOvalShape(x,y){
+    this.ctx.save();
+    let radius = 25;
+     //background
+     this.ctx.fillStyle = "black";
+     this.drawHalfCircleLeft(x+2 + radius,y+2 + radius,"black");
+     this.drawHalfCircleRight(x+2 + width-height-xDisplacement-radius, y +2 + radius,"black");
+     this.ctx.fillRect(x+2 + radius, y +2 ,width-height-xDisplacement - 2*radius,50);
+
+     //The panel 
+    this.ctx.fillStyle = this.scoreBoardColor;
+    this.drawHalfCircleLeft(x + radius,y + radius,this.scoreBoardColor);
+    this.drawHalfCircleRight(x + width-height-xDisplacement-radius, y + radius,this.scoreBoardColor);
+    this.ctx.fillRect(x + radius,y,width-height-xDisplacement - 2*radius,50);
+
+      //Text
+      this.ctx.fillStyle = "white";
+      this.ctx.font = '24px sans-serif'
+      let text = "Leaderboard:"
+      this.ctx.fillText(text, x + 60, y + 30)
+      this.ctx.restore();
+  }
+
+
   drawScorePanel(x,y,player) {
     this.ctx.save();
     let radius = 25;
     //background
     this.ctx.fillStyle = "black";
-    this.drawHalfCircleLeft(x+2 + radius,y+2 + radius,"black");
+    this.drawHalfCircleLeft(x+2+ radius +30,y+2 + radius,"black");
     this.drawHalfCircleRight(x+2 + width-height-xDisplacement-radius, y +2 + radius,"black");
-    this.ctx.fillRect(x+2 + radius, y +2 ,width-height-xDisplacement - 2*radius,50);
+    this.ctx.fillRect(x+2 + radius +30, y +2 ,width-height-xDisplacement - 2*radius -30,50);
 
     //The panel 
     this.ctx.fillStyle = player.color;
-    this.drawHalfCircleLeft(x + radius,y + radius,player.color);
+    this.drawHalfCircleLeft(x + radius +30,y + radius,player.color);
     this.drawHalfCircleRight(x + width-height-xDisplacement-radius, y + radius,player.color);
-    this.ctx.fillRect(x + radius,y,width-height-xDisplacement - 2*radius,50);
+    this.ctx.fillRect(x + radius +30,y,width-height-xDisplacement - 2*radius-30,50);
 
     //Text
     this.ctx.fillStyle = "white";
@@ -261,7 +290,7 @@ class Game {
     let textName = player.name + ": "
     this.ctx.fillText(textName, x + 60, y + 30)
     let textScore = player.score
-    this.ctx.fillText(textScore,x + 280, y + 30)
+    this.ctx.fillText(textScore,x + 280 +30, y + 30)
     this.ctx.restore();
   }
 

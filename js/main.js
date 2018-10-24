@@ -10,19 +10,29 @@ var yDisplacement = 30;
 var gameBoardXDisplacement = width-height+xDisplacement;
 var gameBoardYDisplacement = yDisplacement;
 
-var levelCounter = 1;
+var levelCounter = 4;
 var game;
 
 
 
-ctx.fillRect(0,0,width,height);
+// ctx.fillRect(0,0,width,height);
 
 
 
 var playButton = document.getElementById('play');
 var howToButton = document.getElementById('how-to');
-var level1 = document.getElementById('level-1');
-var level2 = document.getElementById('level-2');
+// var level1 = document.getElementById('level-1');
+// var level2 = document.getElementById('level-2');
+
+var levelsDivs =  document.querySelectorAll('.level')
+
+for (var i = 0; i<levelsDivs.length;i++) {
+  levelsDivs[i].addEventListener("click",function(e){
+    levelCounter = Number(e.target.getAttribute('data-level'))-1;
+    setPlayBtn();
+  })
+}
+
 
 howToButton.onclick = function() {
   var instructions = new Instructions(ctx);
@@ -30,15 +40,15 @@ howToButton.onclick = function() {
   instructions.displayText();
 }
 
-level1.onclick = function() {
-  levelCounter = 0;
-  setPlayBtn();
-}
+// level1.onclick = function() {
+//   levelCounter = 0;
+//   setPlayBtn();
+// }
 
-level2.onclick = function() {
-  levelCounter = 1;
-  setPlayBtn();
-}
+// level2.onclick = function() {
+//   levelCounter = 1;
+//   setPlayBtn();
+// }
 
 function setRestartBtn() {
   playButton.innerText = "RESTART LEVEL " + (levelCounter+1);
@@ -86,7 +96,6 @@ var playerMovement = function(e) {
 playButton.onclick = function() {
   if (game != undefined) game.reset();
   setRestartBtn();
-  console.log(levels[levelCounter].map,levels[levelCounter].humanPlayer,levels[levelCounter].computerOpponents)
   game = new Game(ctx,levels[levelCounter].map,levels[levelCounter].humanPlayer,levels[levelCounter].computerOpponents, levels[levelCounter].starterText, levels[levelCounter].maximumDuration,levels[levelCounter].scoreBoardColor, levels[levelCounter].backgroundColor);
   game.start();
   window.addEventListener('keydown',playerMovement);

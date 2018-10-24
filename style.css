@@ -6,6 +6,11 @@ body {
   display: flex;
 }
 
+canvas {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
 h1 {
   color: white;
   text-align: center;
@@ -38,6 +43,7 @@ button.button1:hover{
   display: flex;
   flex-direction: column;
   width: 300px;
+  
 }
 
 .half {
@@ -51,15 +57,48 @@ button.button1:hover{
 }
 
 .top-half {
+  border-radius: 20px;
   padding: 10px;
-  height: 350px;
-  background-color: #3D2B3D;
+  height: 310px;
+  background-color: #D64550;
   box-sizing: border-box; 
+  margin-top: 30px;
 }
 
 .container-2 {
   display: flex;
   flex-direction: row;
+}
+
+.container-3 {
+  display: flex;
+  flex-direction: row;
+}
+
+.all-levels {
+  margin-top: 30px;
+}
+
+.level {
+  width: 100px;
+  height: 100px;
+  background-color:#9B1D20;
+}
+
+.top-left {
+  border-top-left-radius: 20px;;
+}
+
+.bottom-left {
+  border-bottom-left-radius: 20px;;
+}
+
+.top-right {
+  border-top-right-radius: 20px;;
+}
+
+.bottom-right {
+  border-bottom-right-radius: 20px;;
 }
 
 .container-4 {
@@ -72,7 +111,16 @@ button.button1:hover{
   align-items: center;
   flex-direction: row;
   justify-content: space-around;
-  color: white;
+  color: #3C3C3C;
+  color: #F5F5F5;
+}
+
+.level:hover {
+  background-color: #087E8B;
+}
+
+.level:active {
+  background-color: #087E8B;
 }
 
 .red {

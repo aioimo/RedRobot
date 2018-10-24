@@ -9,7 +9,7 @@ class Player {
     this.color = color;
     this.score = 0;
     this.img = new Image();
-    this.img.src = "../images/redRobot.jpg"
+    this.img.src = "../images/redRobotTransparent.png"
   }
 
   //determines point value of a given space 
