@@ -1,10 +1,10 @@
 @font-face { 
-  font-family: PressStart2P; 
-  src: url('font/PressStart2P.ttf'); 
+  font-family: PokemonGB; 
+  src: url('font/PokemonGB.ttf'); 
 } 
 
 html {
-  font-family: PressStart2P,sans-serif;
+  font-family: PokemonGB ,sans-serif;
 }
 
 body {
@@ -23,7 +23,8 @@ h1 {
 }
 
 button.button1 {
-  font-family: PressStart2P;
+  /* font-family: PressStart2P; */
+  font-family: PokemonGB;
   display: inline-block;
   height: 60px;
   background-color: transparent;

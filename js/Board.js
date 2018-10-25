@@ -246,17 +246,17 @@ class Game {
     this.drawRoundedBox(0,0,textBoxWidth,textBoxHeight,25,this.scoreBoardColor)
 
     //draw title
-    this.ctx.font = '36px sans-serif'
+    this.ctx.font = '26px PokemonGB'
     this.ctx.textAlign = "center"
     this.ctx.fillStyle = "white";
-    wrapText(this.ctx,this.text1[0],textBoxWidth/2,50,textBoxWidth-20,20)
+    wrapText(this.ctx,this.text1[0],textBoxWidth/2,50,textBoxWidth-20,35)
 
     //draw other text
-    this.ctx.font = '16px sans-serif'
+    this.ctx.font = '14px PokemonGB'
     this.ctx.textAlign = "left"
     this.ctx.fillStyle = "white";
     for  (var i = 1; i<this.text1.length;i++) {
-      wrapText(this.ctx,this.text1[i],20,20 + 60*i,textBoxWidth-20,25)
+      wrapText(this.ctx,this.text1[i],20,35 + 50*i,textBoxWidth-20,25)
     }
     
     this.ctx.restore();
@@ -308,7 +308,7 @@ class Game {
 
     //Text
     this.ctx.fillStyle = "white";
-    this.ctx.font = '24px sans-serif'
+    this.ctx.font = '24px PokemonGB'
     let text = "Leaderboard:"
     this.ctx.fillText(text, x + 60, y + 30)
     this.ctx.restore();
@@ -332,7 +332,7 @@ class Game {
 
     //Text
     this.ctx.fillStyle = "white";
-    this.ctx.font = '16px sans-serif'
+    this.ctx.font = '12px PokemonGB'
     let textName = player.name
     this.ctx.fillText(textName, x + 60, y + 30)
     let textScore = player.score
