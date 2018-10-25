@@ -8,7 +8,7 @@ class Player {
     this.color = color;
     this.score = 0;
     this.img = new Image();
-    this.img.src = "../images/redRobotTransparent.png"
+    this.img.src = "./images/redRobotTransparent.png"
     this.connected = true;
   }
 
