@@ -19,12 +19,13 @@ canvas {
 h1 {
   color: white;
   text-align: center;
+  font-size: 1.6rem;
 }
 
 button.button1 {
   font-family: PressStart2P;
-  height: 100px;
   display: inline-block;
+  height: 60px;
   background-color: transparent;
   padding: 0.35em 1.2em;
   border: 0.1em solid #FFFFFF;
@@ -35,9 +36,8 @@ button.button1 {
   /* font-family: 'Roboto',sans-serif; */
   font-weight: 300;
   color: #FFFFFF;
-  text-align:center;
+  text-align: center;
   transition: all 0.2s;
-  
   margin-top: 20px;
 }
 
