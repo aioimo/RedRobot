@@ -19,6 +19,4 @@ class Square {
     this.color = player.color;
     this.passable = true;
   }
-
-
 }
