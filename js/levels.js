@@ -4,31 +4,31 @@ var levels =
   {
     level: 1,
     map: matrix(7),
-    humanPlayer: [new Player("#A5243D")],
+    humanPlayer: [new Player("#D62828")],
     computerOpponents: [
-      new EasyAI('Raven',"#17BEBB","../images/raven.png", 0,4),
-      new EasyAI("Kangaroo Rat", "#4B1D3F", "../images/kangarooRat.png", 4,4),
-      new EasyAI('Pigeon',"#0E7C7B", "../images/pigeonSquare.png", 4,0)
+      new EasyAI('Brown Cow',"#7F3122","../images/cow.png", 6,3),
+      new EasyAI('Chicken',"#E6AA68", "../images/chicken.png", 3,6),
     ],
     maximumDuration: 20,
-    starterText: "Round 1 – This is an easy training round. The other characters aren't very bright...yet. Remember, the round ends when there's no white space left on the board.",
-    scoreBoardColor: "#33032F",
+    starterText: ["Round 1", "Training round", "Remember: You want the most points!", "Remember: the round ends when there's no white space left on the board.", "Remember: You can't walk through squares with a thick border."],
+    scoreBoardColor: "#003049",
     backgroundColor: "white"
   },
   {
     level: 2,
-    map: matrix(6),
-    humanPlayer: [new Player("#FF0000")],
+    map: matrix(7),
+    humanPlayer: [new Player("#A5243D")],
     computerOpponents: [
-      new EasyAI('blue bear',"#EF8A17","../images/blueBear.jpg", 4,1),
-      new AIPlayer('green gorilla',"#C6C013", "../images/greenGorilla.png", 5,5),
-      new EasyAI("pink peacock", "#242F40", "../images/pinkPeacock.png", 1,4),
+      new AIPlayer('Raven',"#17BEBB","../images/raven.png", 6,6),
+      new EasyAI("Kangaroo Rat", "#4B1D3F", "../images/kangarooRat.png", 3,5),
+      new EasyAI('Pigeon',"#0E7C7B", "../images/pigeonSquare.png", 5,3)
     ],
-    maximumDuration: 18,
-    starterText: "Round 2 -- The other plays are a little smarter now. Just a little.",
-    scoreBoardColor: "#087F8C",
+    maximumDuration: 16,
+    starterText: ["Round 2", "The other plays are a little smarter now. Just a little."],
+    scoreBoardColor: "#33032F",
     backgroundColor: "white"
   },
+
 
 
   {
@@ -36,54 +36,55 @@ var levels =
     map: matrix(9),
     humanPlayer: [new Player('#DE3C4B')],
     computerOpponents: [
-      new EasyAI('Fish 1',"#FFBA49", "../images/fishColorful.png", 5,5),
-      new EasyAI('Fish 2',"#FFBA49","../images/fishYellow.png", 6,6),
+      new EasyAI('Team Fish',"#FFBA49", "../images/fishColorful.png", 5,5),
+      new EasyAI('Team Fish',"#FFBA49","../images/fishYellow.png", 6,6),
     ],
     maximumDuration: 10,
-    starterText: "Round 3 – 2 against 1",
+    starterText: ["Round 3","Those fish are friends.","2  against  1"],
     scoreBoardColor: "#23001E",
     backgroundColor: "white"
   },
   {
     level: 4,
     map: matrix(12),
-    humanPlayer: [new Player()],
+    humanPlayer: [new Player("#F61067")],
     computerOpponents: [
-      new EasyAI('blue bear',"#009ACD","../images/blueBear.jpg", 0,3),
-      new AIPlayer('green gorilla',"green", "../images/greenGorilla.png", 3,3),
-      new FairAI("pink peacock", "#FF69B4", "../images/pinkPeacock.png", 7,7),
+      new EasyAI('Butterfly',"#5E239D","../images/blueButterfly.png", 11,6),
+      new AIPlayer('Pretty Butterfly',"#6DECAF", "../images/prettyButterfly.png", 6,6),
+      new FairAI("Monarch Butterfly", "#E6AF2E", "../images/monarchButterfly.png", 11,11),
+      new EasyAI('Dark Butterfly',"#226F54","../images/darkButterfly.png", 6,11),
     ],
     maximumDuration: 15,
-    starterText: "Round 4",
-    soreBoardColor: "black",
+    starterText: ["Round 4"],
+    scoreBoardColor: "#E6AF2E",
     backgroundColor: "white"
   },
   {
     level: 5,
     map: matrix(14),
-    humanPlayer: [new Player()],
+    humanPlayer: [new Player("#DB162F")],
     computerOpponents: [
-      new FairAI('blue bear',"#009ACD","../images/blueBear.jpg", 13,13),
-      new FairAI('green gorilla',"green", "../images/greenGorilla.png", 0,13),
-      new FairAI("pink peacock", "pink", "../images/pinkPeacock.png", 13,0),
+      new FairAI('Zebra',"#1B1B1E","../images/zebra.png", 0,13),
+      new AIPlayer('Lion',"#F18F01", "../images/lion.png", 5,5),
+      new FairAI("Elephant", "#698196", "../images/elephant.png", 13,0),
     ],
-    maximumDuration: 12,
-    starterText: "Round 5!! The fight continues...",
-    scoreBoardColor: "black",
+    maximumDuration: 16,
+    starterText: ["Round 5"],
+    scoreBoardColor: "#550C18",
     backgroundColor: "white"
   },
   {
     level: 6,
     map: matrix(14),
-    humanPlayer: [new Player()],
+    humanPlayer: [new Player('#764134')],
     computerOpponents: [
-      new FairAI('blue bear',"#009ACD","../images/blueBear.jpg", 13,13),
-      new FairAI('green gorilla',"green", "../images/greenGorilla.png", 0,13),
-      new FairAI("pink peacock", "pink", "../images/pinkPeacock.png", 13,0),
+      new EasyAI('Team Green Gorilla',"#8FB339", "../images/greenGorilla.png", 7,10),
+      new FairAI('Team Green Gorilla',"#8FB339", "../images/greenGorilla.png", 10,10),
+      new EasyAI('Team Green Gorilla',"#8FB339", "../images/greenGorilla.png", 10,7),
     ],
     maximumDuration: 12,
-    starterText: "Round 6!! The fight continues...",
-    scoreBoardColor: "black",
+    starterText: ["Round 6", "3 vs. 1"],
+    scoreBoardColor: "#003B36",
     backgroundColor: "white"
   },
   {
@@ -91,40 +92,43 @@ var levels =
     map: matrix(14),
     humanPlayer: [new Player()],
     computerOpponents: [
-      new FairAI('blue bear',"#009ACD","../images/blueBear.jpg", 13,13),
-      new FairAI('green gorilla',"green", "../images/greenGorilla.png", 0,13),
-      new FairAI("pink peacock", "pink", "../images/pinkPeacock.png", 13,0),
+      new AIPlayer('Capuchin Monkey',"#335C67","../images/capuchinMonkey.png", 13,13),
+      new FairAI('Bearded Dragon',"#B1B695", "../images/beardedDragon.jpg", 0,13),
+      new FairAI("Parrot", "#FCD0A1", "../images/parrot.png", 13,0),
+      new AIPlayer("Tiger", "#E09F3E", "../images/tiger.png", 5,5)
     ],
-    maximumDuration: 12,
-    starterText: "Round 7!! The fight continues...",
-    scoreBoardColor: "black",
+    maximumDuration: 14,
+    starterText: ["Round 7"],
+    scoreBoardColor: "#540B0E",
     backgroundColor: "white"
   },
   {
     level: 8,
-    map: matrix(14),
-    humanPlayer: [new Player()],
+    map: matrix(15),
+    humanPlayer: [new Player('#5C0029')],
     computerOpponents: [
-      new FairAI('blue bear',"#009ACD","../images/blueBear.jpg", 13,13),
-      new FairAI('green gorilla',"green", "../images/greenGorilla.png", 0,13),
-      new FairAI("pink peacock", "pink", "../images/pinkPeacock.png", 13,0),
+      new AIPlayer('Penguin',"#8AA29E","../images/penguin.png", 10,10),
+      new AIPlayer('Polar Bear',"#531CB3", "../images/polarBear.png", 0,7),
+      new AIPlayer("Owl", "#DCEDFF", "../images/owl.png", 7,0),
     ],
-    maximumDuration: 12,
-    starterText: "Round 8!! The fight continues...",
-    scoreBoardColor: "black",
+    maximumDuration: 16,
+    starterText: ["Round 8"],
+    scoreBoardColor: "#531CB3",
     backgroundColor: "white"
   },
   {
     level: 9,
-    map: matrix(14),
+    map: matrix(20),
     humanPlayer: [new Player()],
     computerOpponents: [
-      new FairAI('blue bear',"#009ACD","../images/blueBear.jpg", 13,13),
-      new FairAI('green gorilla',"green", "../images/greenGorilla.png", 0,13),
-      new FairAI("pink peacock", "pink", "../images/pinkPeacock.png", 13,0),
+      new EasyAI('Another Pigeon',"#009ACD","../images/pigeon.png", 10,0),
+      new AIPlayer('Return of the Green Gorillas',"green", "../images/greenGorilla.png", 1,19),
+      new AIPlayer('Return of the Green Gorillas',"green", "../images/greenGorilla.png", 0,18),
+      new AIPlayer("Pink Peacock", "pink", "../images/pinkPeacock.png", 2,2),
+      new AIPlayer("Lion", "orange", "../images/lion2.png", 19,19),
     ],
-    maximumDuration: 12,
-    starterText: "Round 9!! This one is really hard.",
+    maximumDuration: 20,
+    starterText: ["Round 9", "i.e. the Final Round"],
     scoreBoardColor: "black",
     backgroundColor: "white"
   }

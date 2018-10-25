@@ -233,14 +233,32 @@ class Game {
     var textBoxWidth = width-height - xDisplacement;
     var textBoxHeight = height/2-2*yDisplacement;
     if(this.checkGameOver()) {
-      this.text1 = "Game Over -- Winner is:      " + this.allPlayers[0].name
+      this.text1 = []
+      this.text1.push("Round Over");
+      this.text1.push("Winner is " + this.allPlayers[0].name)
     }
-    this.ctx.translate(xDisplacement,height/2);
+    if (this.checkRedRobotWin()) {
+      this.text1.push("Congratulations!");
+      this.text1.push("Click the button the right to play level " + (levelCounter+2))
+    }
+    this.ctx.translate(xDisplacement,40 + height/2);
     this.drawRoundedBox(2,2,textBoxWidth,textBoxHeight,25,"black")
     this.drawRoundedBox(0,0,textBoxWidth,textBoxHeight,25,this.scoreBoardColor)
-    this.ctx.font = '16px sans-serif'
+
+    //draw title
+    this.ctx.font = '36px sans-serif'
+    this.ctx.textAlign = "center"
     this.ctx.fillStyle = "white";
-    wrapText(this.ctx,this.text1,20,50,textBoxWidth-20,25)
+    wrapText(this.ctx,this.text1[0],textBoxWidth/2,50,textBoxWidth-20,20)
+
+    //draw other text
+    this.ctx.font = '16px sans-serif'
+    this.ctx.textAlign = "left"
+    this.ctx.fillStyle = "white";
+    for  (var i = 1; i<this.text1.length;i++) {
+      wrapText(this.ctx,this.text1[i],20,20 + 60*i,textBoxWidth-20,25)
+    }
+    
     this.ctx.restore();
   }
 
@@ -250,7 +268,7 @@ class Game {
     let indent = 30;
     this.drawOvalShape(0,0);
     for (var i = 0; i<this.allPlayers.length;i++) {
-      this.drawScorePanel(0,60+i*60,this.allPlayers[i]);
+      this.drawScorePanel(0,60+i*50,this.allPlayers[i]);
     }
     this.ctx.restore();
   }
@@ -259,7 +277,7 @@ class Game {
     this.ctx.save();
     this.ctx.fillStyle = color;
     this.ctx.beginPath();
-    this.ctx.arc(x,y,25,Math.PI/2,3*Math.PI/2)
+    this.ctx.arc(x,y,20,Math.PI/2,3*Math.PI/2)
     this.ctx.fill();
     this.ctx.restore();
   }
@@ -268,54 +286,54 @@ class Game {
     this.ctx.save();
     this.ctx.fillStyle = color;
     this.ctx.beginPath();
-    this.ctx.arc(x,y,25,Math.PI/2,3*Math.PI/2, true)
+    this.ctx.arc(x,y,20,Math.PI/2,3*Math.PI/2, true)
     this.ctx.fill();
     this.ctx.restore();
   }
 
   drawOvalShape(x,y){
     this.ctx.save();
-    let radius = 25;
+    let radius = 20;
      //background
      this.ctx.fillStyle = "black";
      this.drawHalfCircleLeft(x+2 + radius,y+2 + radius,"black");
      this.drawHalfCircleRight(x+2 + width-height-xDisplacement-radius, y +2 + radius,"black");
-     this.ctx.fillRect(x+2 + radius, y +2 ,width-height-xDisplacement - 2*radius,50);
+     this.ctx.fillRect(x+2 + radius, y +2 ,width-height-xDisplacement - 2*radius,40);
 
      //The panel 
     this.ctx.fillStyle = this.scoreBoardColor;
     this.drawHalfCircleLeft(x + radius,y + radius,this.scoreBoardColor);
     this.drawHalfCircleRight(x + width-height-xDisplacement-radius, y + radius,this.scoreBoardColor);
-    this.ctx.fillRect(x + radius,y,width-height-xDisplacement - 2*radius,50);
+    this.ctx.fillRect(x + radius,y,width-height-xDisplacement - 2*radius,40);
 
-      //Text
-      this.ctx.fillStyle = "white";
-      this.ctx.font = '24px sans-serif'
-      let text = "Leaderboard:"
-      this.ctx.fillText(text, x + 60, y + 30)
-      this.ctx.restore();
+    //Text
+    this.ctx.fillStyle = "white";
+    this.ctx.font = '24px sans-serif'
+    let text = "Leaderboard:"
+    this.ctx.fillText(text, x + 60, y + 30)
+    this.ctx.restore();
   }
 
 
   drawScorePanel(x,y,player) {
     this.ctx.save();
-    let radius = 25;
+    let radius = 20;
     //background
     this.ctx.fillStyle = "black";
     this.drawHalfCircleLeft(x+2+ radius +30,y+2 + radius,"black");
     this.drawHalfCircleRight(x+2 + width-height-xDisplacement-radius, y +2 + radius,"black");
-    this.ctx.fillRect(x+2 + radius +30, y +2 ,width-height-xDisplacement - 2*radius -30,50);
+    this.ctx.fillRect(x+2 + radius +30, y +2 ,width-height-xDisplacement - 2*radius -30,40);
 
     //The panel 
     this.ctx.fillStyle = player.color;
     this.drawHalfCircleLeft(x + radius +30,y + radius,player.color);
     this.drawHalfCircleRight(x + width-height-xDisplacement-radius, y + radius,player.color);
-    this.ctx.fillRect(x + radius +30,y,width-height-xDisplacement - 2*radius-30,50);
+    this.ctx.fillRect(x + radius +30,y,width-height-xDisplacement - 2*radius-30,40);
 
     //Text
     this.ctx.fillStyle = "white";
-    this.ctx.font = '24px sans-serif'
-    let textName = player.name + ": "
+    this.ctx.font = '16px sans-serif'
+    let textName = player.name
     this.ctx.fillText(textName, x + 60, y + 30)
     let textScore = player.score
     this.ctx.fillText(textScore,x + 280 +30, y + 30)
