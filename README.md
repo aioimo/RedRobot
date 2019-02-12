@@ -18,21 +18,31 @@ Red Robot is a 1-player puzzle game I built during the Ironhack bootcamp that ru
 - Vanilla JavaScript
 - the canvas HTML element to draw
 
+
+## Opponents
+
+The opponents configuration is in the `Players.js` file. There are currently 4 classes of AI player: `AIPlayer` , `EasyAI` , `MediumAI` , `FairAI` with their own moving behavior. These 4 classes inherit from the `Player`class. 
+
+To change how an opponent moves, update the return values of the corresponding `evaluateCoordinate(y,x)` method. 
+
+Do not change the `evaluateCoordinate(y,x)` method of the `Player`class or risk breaking the code. 
+
+
 ## Levels
 
-The game has 9 levels, but creating your own new level is easy. You have to add a Level object to the levels array in `js/levels.js`. 
+The game has 9 levels, but creating your own new level is straightforward. You have to add a Level object (like below) to the levels array in the `js/levels.js` file. 
 
 ``````
   {
     level: 10,
-    map: matrix(8),
-    humanPlayer: [new Player("#A5243D")],
+    map: matrix(8),           //The size of the grid
+    humanPlayer: [new Player("#A5243D"), 0, 0],   //The color of the human player, starting X coordinate, starting Y coordinate
     computerOpponents: [
-      new MediumAI('Raven',"#17BEBB","./images/raven.png", 6,6),
+      new MediumAI('Raven',"#17BEBB","./images/raven.png", 6,6),  // class of Computer Opponent, color, character Image, starting coordinate X, starting coordinate Y
       new EasyAI("Kangaroo Rat", "#4B1D3F", "./images/kangarooRat.png", 3,5),
       new EasyAI('Pigeon',"#0E7C7B", "./images/pigeonSquare.png", 5,3)
     ],
-    maximumDuration: 16,
+    maximumDuration: 16,      //Number of turns until colored squares become impassable.
     starterText: ["Round 10", "A customized level."],
     scoreBoardColor: "#33032F",
     backgroundColor: "white"
