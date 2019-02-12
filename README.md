@@ -1,11 +1,13 @@
 # The Red Robot and the Color Crusades
 ## Introduction
 
-Red Robot is a 1-player puzzle game I built during the Ironhack bootcamp that runs in the browser. The player controls the Red Robot, trying to outmanoeuvre various colorful animal opponents. 
+Red Robot is a 1-player puzzle game I built during the Ironhack bootcamp that runs in the browser. The player controls the Red Robot, trying to outmanoeuvre various colorful animal opponents, to get the most points.
 
 The game can be played on Github Pages: https://aioimo.github.io/redrobot/.
 
-![alt text](https://user-images.githubusercontent.com/24706154/52619615-6a080180-2ea2-11e9-938c-afc45dd4ef92.png "Red Robot") ![alt text](https://user-images.githubusercontent.com/24706154/52620665-75106100-2ea5-11e9-9478-0510ea02b360.png "Red Robot")
+| ![alt text](https://user-images.githubusercontent.com/24706154/52619615-6a080180-2ea2-11e9-938c-afc45dd4ef92.png "Red Robot") | ![alt text](https://user-images.githubusercontent.com/24706154/52620665-75106100-2ea5-11e9-9478-0510ea02b360.png "Red Robot")
+| ![alt text](https://user-images.githubusercontent.com/24706154/52632929-283b8300-2ec3-11e9-8fa1-0a84e6d4f7bc.png "Red Robot") | ![alt text](https://user-images.githubusercontent.com/24706154/52632985-55883100-2ec3-11e9-94ff-cd2f5c98778d.png "Red Robot")
+
 
 
 ## How to Play
@@ -38,11 +40,13 @@ The game has 9 levels, but creating your own new level is straightforward. You h
   {
     level: 10,
     map: matrix(14),     //The size of the grid
-    //The color of the human player, starting X coordinate, starting Y coordinate
+
+    //The color of the human player, starting X coordinate, starting Y coordinate.
     humanPlayer: [new Player("#A5243D"), 0, 0],   
+
+    // Add opponents here with following parameters:
+    // class of Computer Opponent, color, character Image, starting coordinate X, starting coordinate Y
     computerOpponents: [
-      // Add opponents here with following parameters:
-      // class of Computer Opponent, color, character Image, starting coordinate X, starting coordinate Y
       new MediumAI('Raven',"#17BEBB","./images/raven.png", 6,6),  
       new EasyAI("Kangaroo Rat", "#4B1D3F", "./images/kangarooRat.png", 3,5),
       new AIPlayer('Pigeon',"#0E7C7B", "./images/pigeonSquare.png", 5,3)
