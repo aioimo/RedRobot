@@ -5,8 +5,13 @@ Red Robot is a 1-player puzzle game I built during the Ironhack bootcamp that ru
 
 The game can be played on Github Pages: https://aioimo.github.io/redrobot/.
 
-| ![alt text](https://user-images.githubusercontent.com/24706154/52619615-6a080180-2ea2-11e9-938c-afc45dd4ef92.png "Red Robot") | ![alt text](https://user-images.githubusercontent.com/24706154/52620665-75106100-2ea5-11e9-9478-0510ea02b360.png "Red Robot")
-| ![alt text](https://user-images.githubusercontent.com/24706154/52632929-283b8300-2ec3-11e9-8fa1-0a84e6d4f7bc.png "Red Robot") | ![alt text](https://user-images.githubusercontent.com/24706154/52632985-55883100-2ec3-11e9-94ff-cd2f5c98778d.png "Red Robot")
+![alt text](https://user-images.githubusercontent.com/24706154/52619615-6a080180-2ea2-11e9-938c-afc45dd4ef92.png "Red Robot") 
+
+![alt text](https://user-images.githubusercontent.com/24706154/52620665-75106100-2ea5-11e9-9478-0510ea02b360.png "Red Robot")
+
+![alt text](https://user-images.githubusercontent.com/24706154/52632929-283b8300-2ec3-11e9-8fa1-0a84e6d4f7bc.png "Red Robot") 
+
+![alt text](https://user-images.githubusercontent.com/24706154/52632985-55883100-2ec3-11e9-94ff-cd2f5c98778d.png "Red Robot")
 
 
 
