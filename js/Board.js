@@ -106,8 +106,6 @@ class Game {
   }
 
   checkGameOver() {
-    console.log("no more empty spaces", this.noMoreEmptySpaces())
-    console.log("No players connected", this.noPlayersConnected())
     return this.noMoreEmptySpaces() || this.noPlayersConnected();
   }
 
@@ -124,7 +122,6 @@ class Game {
   noPlayersConnected() {
     var noOneConnected = true;
     this.allPlayers.forEach(function(player){
-      console.log("connected?", player.name, player.connected)
       if (player.connected) noOneConnected = false;
     })
     return noOneConnected

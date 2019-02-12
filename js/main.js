@@ -51,13 +51,11 @@ var playerMovement = function(e) {
   e.preventDefault();
   if (!game.checkGameOver()) {
     if (e.key === "ArrowUp") {
-      console.log("arrow up")
       if (game.humanPlayers[0].evaluateCoordinate(game.humanPlayers[0].y-1,game.humanPlayers[0].x)>0){
         game.humanPlayers[0].executeMove('north');
       }
       game.update();
     } else if (e.key === "ArrowDown") {
-      console.log("arrow down")
       if (game.humanPlayers[0].evaluateCoordinate(game.humanPlayers[0].y+1,game.humanPlayers[0].x)>0){
         game.humanPlayers[0].executeMove('south');
       }

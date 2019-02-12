@@ -9,7 +9,7 @@ var levels =
       new EasyAI('Brown Cow',"#7F3122","./images/cow.png", 6,3),
       new EasyAI('Chicken',"#E6AA68", "./images/chicken.png", 3,6),
     ],
-    maximumDuration: 20,
+    maximumDuration: 20,  
     starterText: ["Round 1", "Training round", "Remember: You want the most points!", "Remember: the round ends when there's no more available white space. left on the board."],
     scoreBoardColor: "#003049",
     backgroundColor: "white"
