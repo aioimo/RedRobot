@@ -43,7 +43,7 @@ The game has 9 levels, but creating your own new level is straightforward. You h
 ```
   {
     level: 10,
-    map: matrix(14),     //The size of the grid
+    map: createGameBoard(14),     //The size of the grid
 
     //The color of the human player, starting X coordinate, starting Y coordinate.
     humanPlayer: [new Player("#A5243D"), 0, 0],

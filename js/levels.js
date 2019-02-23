@@ -1,7 +1,7 @@
 var levels = [
   {
     level: 1,
-    map: matrix(7),
+    map: createGameBoard(7),
     humanPlayer: [new Player("#D62828")],
     computerOpponents: [
       new EasyAI("Brown Cow", "#7F3122", "./images/cow.png", 6, 3),
@@ -19,7 +19,7 @@ var levels = [
   },
   {
     level: 2,
-    map: matrix(8),
+    map: createGameBoard(8),
     humanPlayer: [new Player("#A5243D")],
     computerOpponents: [
       new MediumAI("Raven", "#17BEBB", "./images/raven.png", 6, 6),
@@ -37,7 +37,7 @@ var levels = [
 
   {
     level: 3, //2 v. 1
-    map: matrix(9),
+    map: createGameBoard(9),
     humanPlayer: [new Player("#DE3C4B")],
     computerOpponents: [
       new EasyAI("Team Fish", "#FFBA49", "./images/fishColorful.png", 5, 5),
@@ -50,7 +50,7 @@ var levels = [
   },
   {
     level: 4,
-    map: matrix(12),
+    map: createGameBoard(12),
     humanPlayer: [new Player("#F61067")],
     computerOpponents: [
       new MediumAI("Butterfly", "#5E239D", "./images/blueButterfly.png", 11, 6),
@@ -83,7 +83,7 @@ var levels = [
   },
   {
     level: 5,
-    map: matrix(14),
+    map: createGameBoard(14),
     humanPlayer: [new Player("#DB162F")],
     computerOpponents: [
       new FairAI("Zebra", "#1B1B1E", "./images/zebra.png", 0, 13),
@@ -97,7 +97,7 @@ var levels = [
   },
   {
     level: 6,
-    map: matrix(14),
+    map: createGameBoard(14),
     humanPlayer: [new Player("#764134")],
     computerOpponents: [
       new EasyAI(
@@ -129,7 +129,7 @@ var levels = [
   },
   {
     level: 7,
-    map: matrix(14),
+    map: createGameBoard(14),
     humanPlayer: [new Player()],
     computerOpponents: [
       new PlayerAI(
@@ -156,7 +156,7 @@ var levels = [
   },
   {
     level: 8,
-    map: matrix(15),
+    map: createGameBoard(15),
     humanPlayer: [new Player("#5C0029")],
     computerOpponents: [
       new PlayerAI("Penguin", "#8AA29E", "./images/penguin.png", 10, 10),
@@ -170,7 +170,7 @@ var levels = [
   },
   {
     level: 9,
-    map: matrix(20),
+    map: createGameBoard(20),
     humanPlayer: [new Player()],
     computerOpponents: [
       new EasyAI("Another Pigeon", "#009ACD", "./images/pigeon.png", 10, 0),
