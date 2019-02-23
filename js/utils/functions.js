@@ -45,16 +45,3 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
   }
   ctx.fillText(line, x, y);
 }
-
-//var player = new Player();
-//addPlayerToMap(player);
-//player.executeMove('south')
-
-function matrixContainsNull(matrix) {
-  for (var row = 0; row < matrix.length; row++) {
-    for (var col = 0; col < matrix[row].length; col++) {
-      if (matrix[row][col].color == null) return true;
-    }
-  }
-  return false;
-}
