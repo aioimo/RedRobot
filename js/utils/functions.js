@@ -7,14 +7,14 @@ function maxInArray(arr) {
 }
 
 function createGameBoard(n) {
-  var grid = [];
-  for (var i = 0; i < n; i++) {
-    var row = [];
-    for (var j = 0; j < n; j++) {
-      row.push(new Square());
+  let grid = [];
+  for (let row = 0; row < n; row++) {
+    grid.push([]);
+    for (let col = 0; col < n; col++) {
+      grid[row][col] = new Square();
     }
-    grid.push(row);
   }
+  console.table(grid);
   return grid;
 }
 
