@@ -52,8 +52,8 @@ class Game {
   }
 
   checkSquares() {
-    for (var row = 0; row < this.world.length; row++) {
-      for (var col = 0; col < this.world.length; col++) {
+    for (let row = 0; row < this.world.length; row++) {
+      for (let col = 0; col < this.world.length; col++) {
         let square = this.world[row][col];
         if (square.color != null && square.passable) {
           square.duration++;
@@ -66,15 +66,15 @@ class Game {
   }
 
   clearMap() {
-    for (var row = 0; row < this.world.length; row++) {
-      for (var col = 0; col < this.world[row].length; col++) {
+    for (let row = 0; row < this.world.length; row++) {
+      for (let col = 0; col < this.world[row].length; col++) {
         this.world[row][col] = new Square(); //will have to add more conditions here to clear map
       }
     }
   }
 
   moveAllComps() {
-    for (var i = 0; i < this.computerPlayers.length; i++) {
+    for (let i = 0; i < this.computerPlayers.length; i++) {
       let comp = this.computerPlayers[i];
       if (comp.connected) {
         comp.lookAround();
@@ -87,10 +87,10 @@ class Game {
     this.allPlayers.forEach(function(player) {
       player.score = 0;
     });
-    for (var row = 0; row < this.world.length; row++) {
-      for (var col = 0; col < this.world[row].length; col++) {
-        var color = this.world[row][col].color;
-        var matchingPlayer = this.allPlayers.filter(function(player) {
+    for (let row = 0; row < this.world.length; row++) {
+      for (let col = 0; col < this.world[row].length; col++) {
+        let color = this.world[row][col].color;
+        let matchingPlayer = this.allPlayers.filter(function(player) {
           return player.color === color;
         });
         if (matchingPlayer.length > 0) {
@@ -118,8 +118,8 @@ class Game {
   }
 
   noMoreEmptySpaces() {
-    for (var row = 0; row < this.world.length; row++) {
-      for (var col = 0; col < this.world[row].length; col++) {
+    for (let row = 0; row < this.world.length; row++) {
+      for (let col = 0; col < this.world[row].length; col++) {
         if (this.world[row][col].color === null) return false;
       }
     }
@@ -127,11 +127,11 @@ class Game {
   }
 
   noPlayersConnected() {
-    var noOneConnected = true;
+    let noPlayerConnected = true;
     this.allPlayers.forEach(function(player) {
-      if (player.connected) noOneConnected = false;
+      if (player.connected) noPlayerConnected = false;
     });
-    return noOneConnected;
+    return noPlayerConnected;
   }
 
   checkRedRobotWin() {
@@ -143,8 +143,8 @@ class Game {
     this.ctx.clearRect(0, 0, width, height);
     this.ctx.fillStyle = this.backgroundColor;
     this.ctx.fillRect(0, 0, width, height);
-    for (var row = 0; row < this.world.length; row++) {
-      for (var col = 0; col < this.world[row].length; col++) {
+    for (let row = 0; row < this.world.length; row++) {
+      for (let col = 0; col < this.world[row].length; col++) {
         if (this.world[row][col].occupyingPlayer != null) {
           this.drawEmptySquare(row, col);
           this.drawCharacter(row, col);
@@ -155,8 +155,8 @@ class Game {
         }
       }
     }
-    for (var row = 0; row < this.world.length; row++) {
-      for (var col = 0; col < this.world[row].length; col++) {
+    for (let row = 0; row < this.world.length; row++) {
+      for (let col = 0; col < this.world[row].length; col++) {
         if (
           this.world[row][col].occupyingPlayer == null &&
           !this.world[row][col].passable
@@ -227,10 +227,6 @@ class Game {
     this.ctx.restore();
   }
 
-  //
-  //var gameBoardgameBoardXDisplacement = 200;
-  //var gameBoardYDisplacement = yDisplacement;
-
   drawCharacter(row, col) {
     this.ctx.save();
     this.ctx.translate(
@@ -255,8 +251,8 @@ class Game {
 
   drawStatusTextBox() {
     this.ctx.save();
-    var textBoxWidth = width - height - xDisplacement;
-    var textBoxHeight = height / 2 - 2 * yDisplacement;
+    const textBoxWidth = width - height - xDisplacement;
+    const textBoxHeight = height / 2 - 2 * yDisplacement;
     if (this.checkGameOver()) {
       this.text1 = [];
       this.text1.push("Round Over");
@@ -296,7 +292,7 @@ class Game {
     this.ctx.font = "14px PokemonGB";
     this.ctx.textAlign = "left";
     this.ctx.fillStyle = "white";
-    for (var i = 1; i < this.text1.length; i++) {
+    for (let i = 1; i < this.text1.length; i++) {
       wrapText(this.ctx, this.text1[i], 20, 35 + 50 * i, textBoxWidth - 20, 25);
     }
 
@@ -308,7 +304,7 @@ class Game {
     this.ctx.translate(xDisplacement, yDisplacement);
     let indent = 30;
     this.drawOvalShape(0, 0);
-    for (var i = 0; i < this.allPlayers.length; i++) {
+    for (let i = 0; i < this.allPlayers.length; i++) {
       this.drawScorePanel(0, 60 + i * 50, this.allPlayers[i]);
     }
     this.ctx.restore();

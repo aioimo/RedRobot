@@ -1,33 +1,33 @@
 //Setup the Canvas and its dimensions
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
-var width = canvas.width;
-var height = canvas.height;
+const width = canvas.width;
+const height = canvas.height;
 
 //Setup global variables for layout
-var xDisplacement = 30;
-var yDisplacement = 30;
+const xDisplacement = 30;
+const yDisplacement = 30;
 
-var gameBoardXDisplacement = width - height + xDisplacement;
-var gameBoardYDisplacement = yDisplacement;
+const gameBoardXDisplacement = width - height + xDisplacement;
+const gameBoardYDisplacement = yDisplacement;
 
 //Initialize game variable and set levelCounter to 0
 var levelCounter = 0;
 var game;
 
 //Select DOM elements
-var playButton = document.getElementById("play");
-var howToButton = document.getElementById("how-to");
-var levelsDivs = document.querySelectorAll(".level");
+const playButton = document.getElementById("play");
+const howToButton = document.getElementById("how-to");
+const levelsDivs = document.querySelectorAll(".level");
 
 //Add click listener to How to Play button
 howToButton.onclick = function() {
-  var instructions = new Instructions(ctx);
+  const instructions = new Instructions(ctx);
   instructions.blackScreen();
   instructions.displayText();
 };
 
-for (var i = 0; i < levelsDivs.length; i++) {
+for (let i = 0; i < levelsDivs.length; i++) {
   levelsDivs[i].addEventListener("click", function(e) {
     levelCounter = Number(e.target.getAttribute("data-level")) - 1;
     setPlayBtn();
@@ -70,7 +70,7 @@ playButton.onclick = function() {
 };
 
 //Handle Logic for Human Player Movement
-var playerMovement = function(e) {
+const playerMovement = function(e) {
   e.preventDefault();
   if (!game.checkGameOver()) {
     if (e.key === "ArrowUp") {

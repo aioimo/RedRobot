@@ -1,4 +1,4 @@
-var levels = [
+const levels = [
   {
     level: 1,
     map: createGameBoard(7),
