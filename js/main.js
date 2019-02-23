@@ -1,23 +1,31 @@
+//Setup the Canvas and its dimensions
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var width = canvas.width;
 var height = canvas.height;
 
+//Setup global variables for layout
 var xDisplacement = 30;
 var yDisplacement = 30;
 
 var gameBoardXDisplacement = width - height + xDisplacement;
 var gameBoardYDisplacement = yDisplacement;
 
+//Initialize game variable and set levelCounter to 0
 var levelCounter = 0;
 var game;
 
-// ctx.fillRect(0,0,width,height);
-
+//Select DOM elements
 var playButton = document.getElementById("play");
 var howToButton = document.getElementById("how-to");
-
 var levelsDivs = document.querySelectorAll(".level");
+
+//Add click listener to How to Play button
+howToButton.onclick = function() {
+  var instructions = new Instructions(ctx);
+  instructions.blackScreen();
+  instructions.displayText();
+};
 
 for (var i = 0; i < levelsDivs.length; i++) {
   levelsDivs[i].addEventListener("click", function(e) {
@@ -25,12 +33,6 @@ for (var i = 0; i < levelsDivs.length; i++) {
     setPlayBtn();
   });
 }
-
-howToButton.onclick = function() {
-  var instructions = new Instructions(ctx);
-  instructions.blackScreen();
-  instructions.displayText();
-};
 
 function setRestartBtn() {
   playButton.innerText = "RESTART LEVEL " + (levelCounter + 1);
@@ -40,6 +42,34 @@ function setPlayBtn() {
   playButton.innerText = "PLAY LEVEL " + (levelCounter + 1);
 }
 
+//Setup game, add eventListener to keyboard to handle player movement
+playButton.onclick = function() {
+  if (game != undefined) game.reset();
+  setRestartBtn();
+  let {
+    map,
+    humanPlayer,
+    computerOpponents,
+    starterText,
+    maximumDuration,
+    scoreBoardColor,
+    backgroundColor
+  } = levels[levelCounter];
+  game = new Game(
+    ctx,
+    map,
+    humanPlayer,
+    computerOpponents,
+    starterText,
+    maximumDuration,
+    scoreBoardColor,
+    backgroundColor
+  );
+  game.start();
+  window.addEventListener("keydown", playerMovement);
+};
+
+//Handle Logic for Human Player Movement
 var playerMovement = function(e) {
   e.preventDefault();
   if (!game.checkGameOver()) {
@@ -88,22 +118,4 @@ var playerMovement = function(e) {
   while (!game.humanPlayers[0].connected && !game.checkGameOver()) {
     game.update();
   }
-};
-
-playButton.onclick = function() {
-  if (game != undefined) game.reset();
-  setRestartBtn();
-  game = new Game(
-    ctx,
-    levels[levelCounter].map,
-    levels[levelCounter].humanPlayer,
-    levels[levelCounter].computerOpponents,
-    levels[levelCounter].starterText,
-    levels[levelCounter].maximumDuration,
-    levels[levelCounter].scoreBoardColor,
-    levels[levelCounter].backgroundColor
-  );
-  var robot = game.humanPlayers[0];
-  game.start();
-  window.addEventListener("keydown", playerMovement);
 };
