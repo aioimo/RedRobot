@@ -111,18 +111,18 @@ class Player {
   }
 
   isConnected() {
-    var toCheck = [
+    let toCheck = [
       [this.y, this.x + 1],
       [this.y + 1, this.x],
       [this.y, this.x - 1],
       [this.y - 1, this.x]
     ];
-    var checked = [];
+    let checked = [];
     while (toCheck.length > 0) {
-      var nextToCheck = toCheck.pop();
+      const nextToCheck = toCheck.pop();
       checked.push(nextToCheck);
-      var currentY = nextToCheck[0];
-      var currentX = nextToCheck[1];
+      const currentY = nextToCheck[0];
+      const currentX = nextToCheck[1];
       if (!this.isPassable(currentY, currentX)) {
         continue;
       } else if (game.world[currentY][currentX].color === null) {
