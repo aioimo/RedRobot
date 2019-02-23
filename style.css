@@ -1,10 +1,10 @@
-@font-face { 
-  font-family: PokemonGB; 
-  src: url('font/PokemonGB.ttf'); 
-} 
+@font-face {
+  font-family: PokemonGB;
+  src: url("font/PokemonGB.ttf");
+}
 
 html {
-  font-family: PokemonGB ,sans-serif;
+  font-family: PokemonGB, sans-serif;
 }
 
 body {
@@ -22,60 +22,41 @@ h1 {
   font-size: 1.6rem;
 }
 
-button.button1 {
-  /* font-family: PressStart2P; */
+.button {
   font-family: PokemonGB;
   display: inline-block;
   height: 60px;
   background-color: transparent;
   padding: 0.35em 1.2em;
-  border: 0.1em solid #FFFFFF;
+  border: 0.1em solid #ffffff;
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.12em;
   box-sizing: border-box;
   text-decoration: none;
-  /* font-family: 'Roboto',sans-serif; */
   font-weight: 300;
-  color: #FFFFFF;
+  color: #ffffff;
   text-align: center;
-  transition: all 0.2s;
   margin-top: 20px;
 }
 
-button.button1:hover{
-  color:#000000;
-  background-color:#FFFFFF;
+.button:hover {
+  color: #000000;
+  background-color: #ffffff;
 }
 
 .side-bar {
   display: flex;
   flex-direction: column;
   width: 300px;
-  
-}
-
-.half {
-  width: 150px;
-  height: 75px;
-}
-
-.quarter {
-  width: 75px;
-  height: 50px;
 }
 
 .top-half {
   border-radius: 20px;
   padding: 10px;
   height: 310px;
-  background-color: #D64550;
-  box-sizing: border-box; 
+  background-color: #d64550;
+  box-sizing: border-box;
   margin-top: 30px;
-}
-
-.container-2 {
-  display: flex;
-  flex-direction: row;
 }
 
 .container-3 {
@@ -90,28 +71,23 @@ button.button1:hover{
 .level {
   width: 100px;
   height: 100px;
-  background-color:#9B1D20;
+  background-color: #9b1d20;
 }
 
 .top-left {
-  border-top-left-radius: 20px;;
+  border-top-left-radius: 20px;
 }
 
 .bottom-left {
-  border-bottom-left-radius: 20px;;
+  border-bottom-left-radius: 20px;
 }
 
 .top-right {
-  border-top-right-radius: 20px;;
+  border-top-right-radius: 20px;
 }
 
 .bottom-right {
-  border-bottom-right-radius: 20px;;
-}
-
-.container-4 {
-  display: flex;
-  flex-direction: row;
+  border-bottom-right-radius: 20px;
 }
 
 .level {
@@ -119,55 +95,14 @@ button.button1:hover{
   align-items: center;
   flex-direction: row;
   justify-content: space-around;
-  color: #3C3C3C;
-  color: #F5F5F5;
+  color: #3c3c3c;
+  color: #f5f5f5;
 }
 
 .level:hover {
-  background-color: #087E8B;
+  background-color: #087e8b;
 }
 
 .level:active {
-  background-color: #087E8B;
-}
-
-.red {
-  height: 150px;
-  background-color:#9B1D20;
-  font-size: 2rem;
-}
-
-.dark-red {
-  height: 75px;
-  background-color: #D34E24;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-around;
-  color: white;
-  font-size: 1.6rem;
-}
-
-.black {
-  background-color: black;
-}
-
-.pink {
-  background-color: pink;
-}
-
-.yellow {
-  background-color: #D8D78F;
-}
-
-.orange {
-  background-color: #635D5C;
-}
-
-.purple {
-  background-color: #9D5C63;
-}
-
-.green {
-  background-color: #F3B3A6;
+  background-color: #087e8b;
 }
