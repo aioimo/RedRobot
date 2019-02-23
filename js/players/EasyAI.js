@@ -1,4 +1,4 @@
-class EasyAI extends AIPlayer {
+class EasyAI extends PlayerAI {
   constructor(name, color, src = "", x = 0, y = 0) {
     super(name, color, src, x, y);
   }

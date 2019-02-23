@@ -1,4 +1,4 @@
-class FairAI extends AIPlayer {
+class FairAI extends PlayerAI {
   constructor(name, color, src = "", x = 0, y = 0) {
     super(name, color, src, x, y);
   }

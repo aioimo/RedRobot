@@ -1,4 +1,4 @@
-class AIPlayer extends Player {
+class PlayerAI extends Player {
   constructor(name, color, src = "", x = 0, y = 0) {
     super();
     this.name = name;
