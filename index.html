@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Red Robot</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Red Robot</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <canvas id="canvas" width="1100" height="700"></canvas>
     <div class="side-bar">
-      <div class="side-bar top-half">     
-         <h1>The Red Robot and the Color Crusades</h1>
-        <button class= "button1" id="play">PLAY LEVEL 1</button>
-        <button class= "button1" id="how-to">HOW TO PLAY</button>
+      <div class="side-bar top-half">
+        <h1>The Red Robot and the Color Crusades</h1>
+        <button class="button1" id="play">PLAY LEVEL 1</button>
+        <button class="button1" id="how-to">HOW TO PLAY</button>
       </div>
       <div class="all-levels">
-          <div class="side-bar container-3"> 
-              <div id="level-1" data-level="1" class="level top-left"> 1</div>
-              <div id="level-2" data-level="2" class="level"> 2</div>
-              <div id="level-3" data-level="3" class="level top-right"> 3</div>
-           </div>
-           <div class="side-bar container-3"> 
-              <div id="level-4" data-level="4" class="level"> 4</div>
-              <div id="level-5" data-level="5" class="level"> 5</div>
-              <div id="level-6" data-level="6" class="level"> 6</div>
-           </div>
-           <div class="side-bar container-3"> 
-              <div id="level-7"  data-level="7" class="level bottom-left"> 7</div>
-              <div id="level-8" data-level="8" class="level"> 8</div>
-              <div id="level-9" data-level="9" class="level bottom-right"> 9</div>
-          </div>
+        <div class="side-bar container-3">
+          <div id="level-1" data-level="1" class="level top-left">1</div>
+          <div id="level-2" data-level="2" class="level">2</div>
+          <div id="level-3" data-level="3" class="level top-right">3</div>
+        </div>
+        <div class="side-bar container-3">
+          <div id="level-4" data-level="4" class="level">4</div>
+          <div id="level-5" data-level="5" class="level">5</div>
+          <div id="level-6" data-level="6" class="level">6</div>
+        </div>
+        <div class="side-bar container-3">
+          <div id="level-7" data-level="7" class="level bottom-left">7</div>
+          <div id="level-8" data-level="8" class="level">8</div>
+          <div id="level-9" data-level="9" class="level bottom-right">9</div>
+        </div>
       </div>
-      
- </div>
-    
-    <script src="js/Players.js"></script>
+    </div>
+
+    <script src="js/Player.js"></script>
+    <script src="js/AIPlayer.js"></script>
+    <script src="js/EasyAI.js"></script>
+    <script src="js/MediumAI.js"></script>
+    <script src="js/FairAI.js"></script>
     <script src="js/Square.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/HowToPlay.js"></script>
     <script src="js/levels.js"></script>
     <script src="js/Board.js"></script>
     <script src="js/main.js"></script>
-</body>
+  </body>
 </html>
