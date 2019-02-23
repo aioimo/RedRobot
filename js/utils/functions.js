@@ -10,7 +10,6 @@ function createGameBoard(n) {
       grid[row][col] = new Square();
     }
   }
-  console.table(grid);
   return grid;
 }
 
