@@ -19,14 +19,7 @@ function createGameBoard(n) {
 }
 
 function unionTwoArrays(a, b) {
-  var c = [];
-  for (var i = 0; i < a.length; i++) {
-    c.push(a[i]);
-  }
-  for (var j = 0; j < b.length; j++) {
-    c.push(b[j]);
-  }
-  return c;
+  return [...a, ...b];
 }
 
 function isArrayAinB(a, b) {
