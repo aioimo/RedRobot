@@ -13,10 +13,6 @@ function createGameBoard(n) {
   return grid;
 }
 
-function unionTwoArrays(a, b) {
-  return [...a, ...b];
-}
-
 function isArrayAinB(a, b) {
   const stringifiedA = JSON.stringify(a);
   const stringifiedB = JSON.stringify(b);
@@ -24,15 +20,15 @@ function isArrayAinB(a, b) {
 }
 
 function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
-  const words = text.split(" ");
-  let line = "";
+  const words = text.split(' ');
+  let line = '';
   for (let i = 0; i < words.length; i++) {
-    const testLine = line + words[i] + " ";
+    const testLine = line + words[i] + ' ';
     const metrics = ctx.measureText(testLine);
     const testWidth = metrics.width;
     if (testWidth > maxWidth && i > 0) {
       ctx.fillText(line, x, y);
-      line = words[i] + " ";
+      line = words[i] + ' ';
       y += lineHeight;
     } else {
       line = testLine;

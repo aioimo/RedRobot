@@ -17,7 +17,7 @@ class Game {
     this.scoreBoardColor = scoreBoardColor;
     this.backgroundColor = backgroundColor;
     this.gameText = text;
-    this.allPlayers = unionTwoArrays(humanPlayers, computerPlayers);
+    this.allPlayers = [...humanPlayers, ...computerPlayers];
     this.maxDuration = maxDuration;
   }
 
