@@ -171,7 +171,7 @@ const levels = [
   {
     level: 9,
     mapSize: 20,
-    humanPlayer: [],
+    humanPlayer: [new Player()],
     computerOpponents: [
       new EasyAI('Another Pigeon', '#009ACD', './images/pigeon.png', 10, 0),
       new PlayerAI(
