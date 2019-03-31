@@ -135,7 +135,9 @@ class Game {
   }
 
   checkRedRobotWin() {
-    return this.checkGameOver() && this.allPlayers[0].name === 'Red Robot';
+    this.humanPlayers.length > 0
+      ? this.checkGameOver() && this.allPlayers[0].name === 'Red Robot'
+      : false;
   }
 
   draw() {
