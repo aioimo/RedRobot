@@ -107,7 +107,7 @@ class Game {
       if (player.connected) {
         player.connected = player.isConnected();
         if (!player.connected) {
-          console.log(player.name, "is not connected");
+          console.log(player.name, 'is not connected');
         }
       }
     });
@@ -135,7 +135,7 @@ class Game {
   }
 
   checkRedRobotWin() {
-    return this.checkGameOver() && this.allPlayers[0].name === "Red Robot";
+    return this.checkGameOver() && this.allPlayers[0].name === 'Red Robot';
   }
 
   draw() {
@@ -174,7 +174,7 @@ class Game {
   drawBorderAroundBoard() {
     this.ctx.save();
     this.ctx.translate(gameBoardXDisplacement, yDisplacement);
-    this.ctx.strokeStyle = "black";
+    this.ctx.strokeStyle = 'black';
     this.ctx.lineWidth = 2;
     this.ctx.strokeRect(
       -2,
@@ -187,7 +187,7 @@ class Game {
 
   drawEmptySquare(row, col) {
     this.ctx.save();
-    this.ctx.fillStyle = "#F0F0F0";
+    this.ctx.fillStyle = '#F0F0F0';
     // this.ctx.fillStyle = "#white";
     this.ctx.translate(
       gameBoardXDisplacement + this.squareSize * col,
@@ -205,7 +205,7 @@ class Game {
   drawColoredSquare(row, col, color) {
     this.ctx.save();
     this.ctx.fillStyle = color;
-    this.ctx.strokeStyle = "white";
+    this.ctx.strokeStyle = 'white';
     this.ctx.translate(
       gameBoardXDisplacement + this.squareSize * col,
       yDisplacement + this.squareSize * row
@@ -217,7 +217,7 @@ class Game {
 
   drawImpassableSquare(row, col) {
     this.ctx.save();
-    this.ctx.strokeStyle = "black";
+    this.ctx.strokeStyle = 'black';
     this.ctx.lineWidth = 4;
     this.ctx.translate(
       gameBoardXDisplacement + this.squareSize * col,
@@ -255,17 +255,17 @@ class Game {
     const textBoxHeight = height / 2 - 2 * yDisplacement;
     if (this.checkGameOver()) {
       this.text1 = [];
-      this.text1.push("Round Over");
-      this.text1.push("Winner is " + this.allPlayers[0].name);
+      this.text1.push('Round Over');
+      this.text1.push('Winner is ' + this.allPlayers[0].name);
     }
     if (this.checkRedRobotWin()) {
-      this.text1.push("Congratulations!");
+      this.text1.push('Congratulations!');
       this.text1.push(
-        "Click the button the right to play level " + (levelCounter + 2)
+        'Click the button the right to play level ' + (levelCounter + 2)
       );
     }
     this.ctx.translate(xDisplacement, 40 + height / 2);
-    this.drawRoundedBox(2, 2, textBoxWidth, textBoxHeight, 25, "black");
+    this.drawRoundedBox(2, 2, textBoxWidth, textBoxHeight, 25, 'black');
     this.drawRoundedBox(
       0,
       0,
@@ -276,9 +276,9 @@ class Game {
     );
 
     //draw title
-    this.ctx.font = "26px PokemonGB";
-    this.ctx.textAlign = "center";
-    this.ctx.fillStyle = "white";
+    this.ctx.font = '26px PokemonGB';
+    this.ctx.textAlign = 'center';
+    this.ctx.fillStyle = 'white';
     wrapText(
       this.ctx,
       this.text1[0],
@@ -289,9 +289,9 @@ class Game {
     );
 
     //draw other text
-    this.ctx.font = "14px PokemonGB";
-    this.ctx.textAlign = "left";
-    this.ctx.fillStyle = "white";
+    this.ctx.font = '14px PokemonGB';
+    this.ctx.textAlign = 'left';
+    this.ctx.fillStyle = 'white';
     for (let i = 1; i < this.text1.length; i++) {
       wrapText(this.ctx, this.text1[i], 20, 35 + 50 * i, textBoxWidth - 20, 25);
     }
@@ -332,12 +332,12 @@ class Game {
     this.ctx.save();
     let radius = 20;
     //background
-    this.ctx.fillStyle = "black";
-    this.drawHalfCircleLeft(x + 2 + radius, y + 2 + radius, "black");
+    this.ctx.fillStyle = 'black';
+    this.drawHalfCircleLeft(x + 2 + radius, y + 2 + radius, 'black');
     this.drawHalfCircleRight(
       x + 2 + width - height - xDisplacement - radius,
       y + 2 + radius,
-      "black"
+      'black'
     );
     this.ctx.fillRect(
       x + 2 + radius,
@@ -362,9 +362,9 @@ class Game {
     );
 
     //Text
-    this.ctx.fillStyle = "white";
-    this.ctx.font = "24px PokemonGB";
-    let text = "Leaderboard:";
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = '24px PokemonGB';
+    let text = 'Leaderboard:';
     this.ctx.fillText(text, x + 60, y + 30);
     this.ctx.restore();
   }
@@ -373,12 +373,12 @@ class Game {
     this.ctx.save();
     let radius = 20;
     //background
-    this.ctx.fillStyle = "black";
-    this.drawHalfCircleLeft(x + 2 + radius + 30, y + 2 + radius, "black");
+    this.ctx.fillStyle = 'black';
+    this.drawHalfCircleLeft(x + 2 + radius + 30, y + 2 + radius, 'black');
     this.drawHalfCircleRight(
       x + 2 + width - height - xDisplacement - radius,
       y + 2 + radius,
-      "black"
+      'black'
     );
     this.ctx.fillRect(
       x + 2 + radius + 30,
@@ -403,8 +403,8 @@ class Game {
     );
 
     //Text
-    this.ctx.fillStyle = "white";
-    this.ctx.font = "12px PokemonGB";
+    this.ctx.fillStyle = 'white';
+    this.ctx.font = '12px PokemonGB';
     let textName = player.name;
     this.ctx.fillText(textName, x + 60, y + 30);
     let textScore = player.score;
@@ -412,7 +412,7 @@ class Game {
     this.ctx.restore();
   }
 
-  drawRoundedBox(x, y, totalWidth, totalHeight, radius, color = "black") {
+  drawRoundedBox(x, y, totalWidth, totalHeight, radius, color = 'black') {
     this.ctx.save();
     let innerHeight = totalHeight - 2 * radius;
     let innerWidth = totalWidth - 2 * radius;
@@ -444,7 +444,7 @@ class Game {
     this.ctx.restore();
   }
 
-  drawQuarterCircle(x, y, radius, startAngle, color = "black") {
+  drawQuarterCircle(x, y, radius, startAngle, color = 'black') {
     this.ctx.save();
     this.ctx.fillStyle = color;
     this.ctx.beginPath();
