@@ -16,7 +16,7 @@ class Game {
     this.computerPlayers = computerPlayers;
     this.scoreBoardColor = scoreBoardColor;
     this.backgroundColor = backgroundColor;
-    this.text1 = text;
+    this.gameText = text;
     this.allPlayers = unionTwoArrays(humanPlayers, computerPlayers);
     this.maxDuration = maxDuration;
   }
@@ -254,13 +254,13 @@ class Game {
     const textBoxWidth = width - height - xDisplacement;
     const textBoxHeight = height / 2 - 2 * yDisplacement;
     if (this.checkGameOver()) {
-      this.text1 = [];
-      this.text1.push('Round Over');
-      this.text1.push('Winner is ' + this.allPlayers[0].name);
+      this.gameText = [];
+      this.gameText.push('Round Over');
+      this.gameText.push('Winner is ' + this.allPlayers[0].name);
     }
     if (this.checkRedRobotWin()) {
-      this.text1.push('Congratulations!');
-      this.text1.push(
+      this.gameText.push('Congratulations!');
+      this.gameText.push(
         'Click the button the right to play level ' + (levelCounter + 2)
       );
     }
@@ -281,7 +281,7 @@ class Game {
     this.ctx.fillStyle = 'white';
     wrapText(
       this.ctx,
-      this.text1[0],
+      this.gameText[0],
       textBoxWidth / 2,
       50,
       textBoxWidth - 20,
@@ -292,8 +292,15 @@ class Game {
     this.ctx.font = '14px PokemonGB';
     this.ctx.textAlign = 'left';
     this.ctx.fillStyle = 'white';
-    for (let i = 1; i < this.text1.length; i++) {
-      wrapText(this.ctx, this.text1[i], 20, 35 + 50 * i, textBoxWidth - 20, 25);
+    for (let i = 1; i < this.gameText.length; i++) {
+      wrapText(
+        this.ctx,
+        this.gameText[i],
+        20,
+        35 + 50 * i,
+        textBoxWidth - 20,
+        25
+      );
     }
 
     this.ctx.restore();
