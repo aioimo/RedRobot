@@ -14,6 +14,7 @@ const gameBoardYDisplacement = yDisplacement;
 //Initialize game variable and set levelCounter to 0
 var levelCounter = 0;
 var game;
+var interval;
 
 //Select DOM elements
 const playButton = document.getElementById('play');
@@ -30,22 +31,20 @@ howToButton.onclick = function() {
 for (let i = 0; i < levelsDivs.length; i++) {
   levelsDivs[i].addEventListener('click', function(e) {
     levelCounter = Number(e.target.getAttribute('data-level')) - 1;
-    setPlayBtn();
+    setPlayBtn('PLAY');
   });
 }
 
-function setRestartBtn() {
-  playButton.innerText = 'RESTART LEVEL ' + (levelCounter + 1);
-}
-
-function setPlayBtn() {
-  playButton.innerText = 'PLAY LEVEL ' + (levelCounter + 1);
+function setPlayBtn(status) {
+  playButton.innerText = `${status} LEVEL ` + (levelCounter + 1);
 }
 
 //Setup game, add eventListener to keyboard to handle player movement
 playButton.onclick = function() {
-  if (game != undefined) game.reset();
-  setRestartBtn();
+  if (game != undefined) {
+    game.reset();
+  }
+  setPlayBtn('RESTART');
   let {
     mapSize,
     humanPlayer,
@@ -66,65 +65,61 @@ playButton.onclick = function() {
     backgroundColor
   );
   game.start();
-  window.addEventListener('keydown', handleKeyPress);
-};
 
-const handleKeyPress = e => {
-  e.preventDefault();
   if (!game.includesHumanPlayer()) {
-    game.update();
+    handleGameWithoutHuman();
   } else {
-    playerMovement(e);
+    window.addEventListener('keydown', handlePlayerMovement);
   }
 };
 
+//Handle Loop logic for Game without Human
+const handleGameWithoutHuman = () => {
+  interval = setInterval(() => {
+    if (!game.checkGameOver()) {
+      game.update();
+    } else {
+      clearInterval(interval);
+    }
+  }, 50);
+};
+
 //Handle Logic for Human Player Movement
-const playerMovement = e => {
+const handlePlayerMovement = e => {
   e.preventDefault();
+  const humanPlayer = game.humanPlayers[0];
   if (!game.checkGameOver()) {
     if (e.key === 'ArrowUp') {
       if (
-        game.humanPlayers[0].evaluateCoordinate(
-          game.humanPlayers[0].y - 1,
-          game.humanPlayers[0].x
-        ) > 0
+        humanPlayer.evaluateCoordinate(humanPlayer.y - 1, humanPlayer.x) > 0
       ) {
-        game.humanPlayers[0].executeMove('north');
+        humanPlayer.executeMove('north');
       }
       game.update();
     } else if (e.key === 'ArrowDown') {
       if (
-        game.humanPlayers[0].evaluateCoordinate(
-          game.humanPlayers[0].y + 1,
-          game.humanPlayers[0].x
-        ) > 0
+        humanPlayer.evaluateCoordinate(humanPlayer.y + 1, humanPlayer.x) > 0
       ) {
-        game.humanPlayers[0].executeMove('south');
+        humanPlayer.executeMove('south');
       }
       game.update();
     } else if (e.key === 'ArrowRight') {
       if (
-        game.humanPlayers[0].evaluateCoordinate(
-          game.humanPlayers[0].y,
-          game.humanPlayers[0].x + 1
-        ) > 0
+        humanPlayer.evaluateCoordinate(humanPlayer.y, humanPlayer.x + 1) > 0
       ) {
-        game.humanPlayers[0].executeMove('east');
+        humanPlayer.executeMove('east');
       }
       game.update();
     } else if (e.key === 'ArrowLeft') {
       if (
-        game.humanPlayers[0].evaluateCoordinate(
-          game.humanPlayers[0].y,
-          game.humanPlayers[0].x - 1
-        ) > 0
+        humanPlayer.evaluateCoordinate(humanPlayer.y, humanPlayer.x - 1) > 0
       ) {
-        game.humanPlayers[0].executeMove('west');
+        humanPlayer.executeMove('west');
       }
       game.update();
     }
   }
-  while (!game.humanPlayers[0].connected && !game.checkGameOver()) {
+  while (!humanPlayer.connected && !game.checkGameOver()) {
     game.update();
   }
 };
