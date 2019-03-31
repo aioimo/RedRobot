@@ -84,17 +84,17 @@ class Game {
   }
 
   determineScores() {
-    this.allPlayers.forEach(function(player) {
+    this.allPlayers.forEach(player => {
       player.score = 0;
     });
     for (let row = 0; row < this.world.length; row++) {
       for (let col = 0; col < this.world[row].length; col++) {
         let color = this.world[row][col].color;
-        let matchingPlayer = this.allPlayers.filter(function(player) {
-          return player.color === color;
-        });
+        let matchingPlayer = this.allPlayers.filter(
+          player => player.color === color
+        );
         if (matchingPlayer.length > 0) {
-          matchingPlayer.forEach(function(player) {
+          matchingPlayer.forEach(player => {
             player.score += 1;
           });
         }
@@ -103,7 +103,7 @@ class Game {
   }
 
   checkAllPlayersConnected() {
-    this.allPlayers.forEach(function(player) {
+    this.allPlayers.forEach(player => {
       if (player.connected) {
         player.connected = player.isConnected();
         if (!player.connected) {
@@ -128,7 +128,7 @@ class Game {
 
   noPlayersConnected() {
     let noPlayerConnected = true;
-    this.allPlayers.forEach(function(player) {
+    this.allPlayers.forEach(player => {
       if (player.connected) noPlayerConnected = false;
     });
     return noPlayerConnected;
@@ -244,9 +244,7 @@ class Game {
   }
 
   reorderByScore(arr) {
-    arr.sort(function(a, b) {
-      return b.score - a.score;
-    });
+    arr.sort((a, b) => b.score - a.score);
   }
 
   drawStatusTextBox() {
