@@ -66,11 +66,20 @@ playButton.onclick = function() {
     backgroundColor
   );
   game.start();
-  window.addEventListener('keydown', playerMovement);
+  window.addEventListener('keydown', handleKeyPress);
+};
+
+const handleKeyPress = e => {
+  e.preventDefault();
+  if (!game.includesHumanPlayer()) {
+    game.update();
+  } else {
+    playerMovement(e);
+  }
 };
 
 //Handle Logic for Human Player Movement
-const playerMovement = function(e) {
+const playerMovement = e => {
   e.preventDefault();
   if (!game.checkGameOver()) {
     if (e.key === 'ArrowUp') {

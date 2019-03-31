@@ -51,6 +51,10 @@ class Game {
     this.start();
   }
 
+  includesHumanPlayer() {
+    return this.humanPlayers.length > 0;
+  }
+
   checkSquares() {
     for (let row = 0; row < this.world.length; row++) {
       for (let col = 0; col < this.world.length; col++) {
@@ -135,7 +139,7 @@ class Game {
   }
 
   checkRedRobotWin() {
-    this.humanPlayers.length > 0
+    this.includesHumanPlayer()
       ? this.checkGameOver() && this.allPlayers[0].name === 'Red Robot'
       : false;
   }
