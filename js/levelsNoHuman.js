@@ -1,8 +1,8 @@
-const levels = [
+const levelsNoHuman = [
   {
     level: 1,
     mapSize: 7,
-    humanPlayer: [new Player('#D62828')],
+    humanPlayer: [],
     computerOpponents: [
       new EasyAI('Brown Cow', '#7F3122', './images/cow.png', 6, 3),
       new EasyAI('Chicken', '#E6AA68', './images/chicken.png', 3, 6)
@@ -20,7 +20,7 @@ const levels = [
   {
     level: 2,
     mapSize: 8,
-    humanPlayer: [new Player('#A5243D')],
+    humanPlayer: [],
     computerOpponents: [
       new MediumAI('Raven', '#17BEBB', './images/raven.png', 6, 6),
       new EasyAI('Kangaroo Rat', '#4B1D3F', './images/kangarooRat.png', 3, 5),
@@ -38,7 +38,7 @@ const levels = [
   {
     level: 3, //2 v. 1
     mapSize: 9,
-    humanPlayer: [new Player('#DE3C4B')],
+    humanPlayer: [],
     computerOpponents: [
       new EasyAI('Team Fish', '#FFBA49', './images/fishColorful.png', 5, 5),
       new MediumAI('Team Fish', '#FFBA49', './images/fishYellow.png', 6, 6)
@@ -51,7 +51,7 @@ const levels = [
   {
     level: 4,
     mapSize: 12,
-    humanPlayer: [new Player('#F61067')],
+    humanPlayer: [],
     computerOpponents: [
       new MediumAI('Butterfly', '#5E239D', './images/blueButterfly.png', 11, 6),
       new PlayerAI(
@@ -98,7 +98,7 @@ const levels = [
   {
     level: 6,
     mapSize: 14,
-    humanPlayer: [new Player('#764134')],
+    humanPlayer: [],
     computerOpponents: [
       new EasyAI(
         'Team Green Gorilla',
@@ -171,7 +171,7 @@ const levels = [
   {
     level: 9,
     mapSize: 20,
-    humanPlayer: [new Player()],
+    humanPlayer: [],
     computerOpponents: [
       new EasyAI('Another Pigeon', '#009ACD', './images/pigeon.png', 10, 0),
       new PlayerAI(
@@ -180,13 +180,6 @@ const levels = [
         './images/greenGorilla.png',
         1,
         19
-      ),
-      new PlayerAI(
-        'Green Gorillas',
-        'green',
-        './images/greenGorilla.png',
-        0,
-        18
       ),
       new PlayerAI('Pink Peacock', 'pink', './images/pinkPeacock.png', 2, 2),
       new PlayerAI('Lion', 'orange', './images/lion2.png', 19, 19)

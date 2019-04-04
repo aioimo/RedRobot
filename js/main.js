@@ -11,10 +11,15 @@ const yDisplacement = 30;
 const gameBoardXDisplacement = width - height + xDisplacement;
 const gameBoardYDisplacement = yDisplacement;
 
+const levelWithHumanPlayers = false;
+
+const activeLevels = levelWithHumanPlayers ? levels : levelsNoHuman;
+
 //Initialize game variable and set levelCounter to 0
 var levelCounter = 0;
 var game;
 var interval;
+var winners = [];
 
 //Select DOM elements
 const playButton = document.getElementById('play');
@@ -39,11 +44,7 @@ function setPlayBtn(status) {
   playButton.innerText = `${status} LEVEL ` + (levelCounter + 1);
 }
 
-//Setup game, add eventListener to keyboard to handle player movement
-playButton.onclick = function() {
-  if (game != undefined) {
-    game.reset();
-  }
+function setupGame() {
   setPlayBtn('RESTART');
   let {
     mapSize,
@@ -53,7 +54,8 @@ playButton.onclick = function() {
     maximumDuration,
     scoreBoardColor,
     backgroundColor
-  } = levels[levelCounter];
+  } = activeLevels[levelCounter];
+
   game = new Game(
     ctx,
     createGameBoard(mapSize),
@@ -65,8 +67,18 @@ playButton.onclick = function() {
     backgroundColor
   );
   game.start();
+}
+
+//Setup game, add eventListener to keyboard to handle player movement
+playButton.onclick = function() {
+  if (game != undefined) {
+    clearInterval(interval);
+    game.reset();
+  }
+  setupGame();
 
   if (!game.includesHumanPlayer()) {
+    window.removeEventListener('keydown', handlePlayerMovement);
     handleGameWithoutHuman();
   } else {
     window.addEventListener('keydown', handlePlayerMovement);
@@ -79,9 +91,11 @@ const handleGameWithoutHuman = () => {
     if (!game.checkGameOver()) {
       game.update();
     } else {
+      recordWinner();
       clearInterval(interval);
+      restartGameWithoutHuman();
     }
-  }, 50);
+  }, 35);
 };
 
 //Handle Logic for Human Player Movement
@@ -122,4 +136,30 @@ const handlePlayerMovement = e => {
   while (!humanPlayer.connected && !game.checkGameOver()) {
     game.update();
   }
+};
+
+const recordWinner = () => {
+  const winner = game.allPlayers[0].name;
+  winners.push(winner);
+  console.log('Total games: ', winners.length, ':', statistics(winners)[1]);
+};
+
+const restartGameWithoutHuman = () => {
+  game.reset();
+  setupGame();
+  handleGameWithoutHuman();
+};
+
+const statistics = winners => {
+  let winCount = {};
+  winners.forEach(winner => {
+    if (winCount[winner]) winCount[winner]++;
+    else winCount[winner] = 1;
+  });
+  let percentage = {};
+  winners.forEach(winner => {
+    percentage[winner] =
+      Math.round((winCount[winner] / winners.length) * 100) + '%';
+  });
+  return [winCount, percentage];
 };

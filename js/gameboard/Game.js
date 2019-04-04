@@ -110,9 +110,6 @@ class Game {
     this.allPlayers.forEach(player => {
       if (player.connected) {
         player.connected = player.isConnected();
-        if (!player.connected) {
-          console.log(player.name, 'is not connected');
-        }
       }
     });
   }

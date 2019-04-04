@@ -1,6 +1,6 @@
 class Player {
-  constructor(color = "red", x = 0, y = 0) {
-    this.name = "Red Robot";
+  constructor(color = 'red', x = 0, y = 0) {
+    this.name = 'Red Robot';
     this.x = x;
     this.y = y;
     this.startingX = x;
@@ -8,47 +8,47 @@ class Player {
     this.color = color;
     this.score = 0;
     this.img = new Image();
-    this.img.src = "./images/redRobotTransparent.png";
+    this.img.src = './images/redRobotTransparent.png';
     this.connected = true;
   }
 
   //determines point value of a given space
   evaluateCoordinate(y, x) {
+    const square = game.world[y][x];
+
     if (
       y < 0 ||
       x < 0 ||
       game.world.length - 1 < y ||
       game.world.length - 1 < x ||
-      !game.world[y][x].passable
+      !square.passable
     ) {
       return -1;
     }
     //Square does not belong to an opponent.
-    if (this.checkIfBlank(game.world[y][x])) return 2;
-    if (this.checkIfOwnColor(game.world[y][x])) return 1;
+    if (this.checkIfBlank(square)) return 2;
+    if (this.checkIfOwnColor(square)) return 1;
 
     //Square belongs to an opponent.
-    let durationQuotient = game.world[y][x].duration / game.maxDuration;
-    if (this.checkIfLeadingPlayersColor(game.world[y][x]))
-      return 5 + durationQuotient;
-    if (this.checkIfOpponentsColor(game.world[y][x]))
-      return 5 + durationQuotient;
+    let durationQuotient = square.duration / game.maxDuration; //tie breaker
+    if (this.checkIfLeadingPlayersColor(square)) return 5 + durationQuotient;
+    if (this.checkIfOpponentsColor(square)) return 5 + durationQuotient;
     else return 1;
   }
 
   executeMove(direction) {
     game.world[this.y][this.x].removePlayerFromSquare(this);
     switch (direction) {
-      case "north":
+      case 'north':
         this.moveNorth();
         break;
-      case "east":
+      case 'east':
         this.moveEast();
         break;
-      case "west":
+      case 'west':
         this.moveWest();
         break;
-      case "south":
+      case 'south':
         this.moveSouth();
         break;
       default:
