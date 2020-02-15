@@ -11,20 +11,18 @@ const yDisplacement = 30;
 const gameBoardXDisplacement = width - height + xDisplacement;
 const gameBoardYDisplacement = yDisplacement;
 
-const levelWithHumanPlayers = false;
+//Select DOM elements
+const $play = document.getElementById('play');
+const howToButton = document.getElementById('how-to');
+const $levels = document.querySelectorAll('.level');
+const checkbox = document.getElementById('includes-human-player');
 
-const activeLevels = levelWithHumanPlayers ? levels : levelsNoHuman;
-
-//Initialize game variable and set levelCounter to 0
-var levelCounter = 0;
+//Initialize game variable and set currentLevel to 0
+var currentLevel = 0;
 var game;
 var interval;
-var winners = [];
-
-//Select DOM elements
-const playButton = document.getElementById('play');
-const howToButton = document.getElementById('how-to');
-const levelsDivs = document.querySelectorAll('.level');
+var winners = []; //array of statistics
+var withHuman = checkbox.checked;
 
 //Add click listener to How to Play button
 howToButton.onclick = function() {
@@ -33,15 +31,20 @@ howToButton.onclick = function() {
   instructions.displayText();
 };
 
-for (let i = 0; i < levelsDivs.length; i++) {
-  levelsDivs[i].addEventListener('click', function(e) {
-    levelCounter = Number(e.target.getAttribute('data-level')) - 1;
+checkbox.onchange = function(e) {
+  withHuman = e.target.checked;
+};
+
+for (let i = 0; i < $levels.length; i++) {
+  $levels[i].addEventListener('click', function(e) {
+    currentLevel = Number(e.target.getAttribute('data-level')) - 1;
+    resetWinners();
     setPlayBtn('PLAY');
   });
 }
 
 function setPlayBtn(status) {
-  playButton.innerText = `${status} LEVEL ` + (levelCounter + 1);
+  $play.innerText = `${status} LEVEL ` + (currentLevel + 1);
 }
 
 function setupGame() {
@@ -54,12 +57,13 @@ function setupGame() {
     maximumDuration,
     scoreBoardColor,
     backgroundColor
-  } = activeLevels[levelCounter];
+  } = levels[currentLevel];
 
   game = new Game(
     ctx,
     createGameBoard(mapSize),
     humanPlayer,
+    withHuman,
     computerOpponents,
     starterText,
     maximumDuration,
@@ -70,7 +74,7 @@ function setupGame() {
 }
 
 //Setup game, add eventListener to keyboard to handle player movement
-playButton.onclick = function() {
+$play.onclick = function() {
   if (game != undefined) {
     clearInterval(interval);
     game.reset();
@@ -93,7 +97,6 @@ const handleGameWithoutHuman = () => {
     } else {
       recordWinner();
       clearInterval(interval);
-      restartGameWithoutHuman();
     }
   }, 35);
 };
@@ -137,6 +140,8 @@ const handlePlayerMovement = e => {
     game.update();
   }
 };
+
+const resetWinners = () => (winners = []);
 
 const recordWinner = () => {
   const winner = game.allPlayers[0].name;

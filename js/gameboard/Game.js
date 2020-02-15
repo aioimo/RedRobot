@@ -3,6 +3,7 @@ class Game {
     ctx,
     world,
     humanPlayers,
+    hasHumanPlayer,
     computerPlayers,
     text,
     maxDuration,
@@ -12,12 +13,12 @@ class Game {
     this.ctx = ctx;
     this.world = world;
     this.squareSize = (height - 2 * yDisplacement) / world.length;
-    this.humanPlayers = humanPlayers;
+    this.humanPlayers = hasHumanPlayer ? humanPlayers : [];
     this.computerPlayers = computerPlayers;
     this.scoreBoardColor = scoreBoardColor;
     this.backgroundColor = backgroundColor;
     this.gameText = text;
-    this.allPlayers = [...humanPlayers, ...computerPlayers];
+    this.allPlayers = [...this.humanPlayers, ...this.computerPlayers];
     this.maxDuration = maxDuration;
   }
 

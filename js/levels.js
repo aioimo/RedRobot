@@ -84,7 +84,7 @@ const levels = [
   {
     level: 5,
     mapSize: 25,
-    humanPlayer: [],
+    humanPlayer: [new Player('#764134')],
     computerOpponents: [
       new FairAI('Zebra', '#1B1B1E', './images/zebra.png', 0, 13),
       new PlayerAI('Lion', '#F18F01', './images/lion.png', 5, 5),
@@ -130,7 +130,7 @@ const levels = [
   {
     level: 7,
     mapSize: 20,
-    humanPlayer: [],
+    humanPlayer: [new Player('#764134')],
     computerOpponents: [
       new PlayerAI(
         'Capuchin Monkey',
@@ -157,7 +157,7 @@ const levels = [
   {
     level: 8,
     mapSize: 15,
-    humanPlayer: [],
+    humanPlayer: [new Player('#764134')],
     computerOpponents: [
       new PlayerAI('Penguin', '#8AA29E', './images/penguin.png', 10, 10),
       new FairAI('Polar Bear', '#531CB3', './images/polarBear.png', 0, 7),
