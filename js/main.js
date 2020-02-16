@@ -1,37 +1,24 @@
-//Setup the Canvas and its dimensions
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
-const width = canvas.width;
-const height = canvas.height;
-
-//Setup global variables for layout
-const xDisplacement = 30;
-const yDisplacement = 30;
-
-const gameBoardXDisplacement = width - height + xDisplacement;
-const gameBoardYDisplacement = yDisplacement;
-
 //Select DOM elements
 const $play = document.getElementById('play');
-const howToButton = document.getElementById('how-to');
+const $howToPlay = document.getElementById('how-to');
 const $levels = document.querySelectorAll('.level');
-const checkbox = document.getElementById('includes-human-player');
+const $isWithHumanPlayer = document.getElementById('includes-human-player');
 
 //Initialize game variable and set currentLevel to 0
 var currentLevel = 0;
 var game;
 var interval;
 var winners = []; //array of statistics
-var withHuman = checkbox.checked;
+var withHuman = $isWithHumanPlayer.checked;
 
 //Add click listener to How to Play button
-howToButton.onclick = function() {
+$howToPlay.onclick = function() {
   const instructions = new Instructions(ctx);
   instructions.blackScreen();
   instructions.displayText();
 };
 
-checkbox.onchange = function(e) {
+$isWithHumanPlayer.onchange = function(e) {
   withHuman = e.target.checked;
 };
 
@@ -147,12 +134,6 @@ const recordWinner = () => {
   const winner = game.allPlayers[0].name;
   winners.push(winner);
   console.log('Total games: ', winners.length, ':', statistics(winners)[1]);
-};
-
-const restartGameWithoutHuman = () => {
-  game.reset();
-  setupGame();
-  handleGameWithoutHuman();
 };
 
 const statistics = winners => {
