@@ -8,7 +8,6 @@ const $isWithHumanPlayer = document.getElementById('includes-human-player');
 var currentLevel = 0;
 var game;
 var interval;
-var winners = []; //array of statistics
 var withHuman = $isWithHumanPlayer.checked;
 
 //Add click listener to How to Play button
@@ -126,26 +125,4 @@ const handlePlayerMovement = e => {
   while (!humanPlayer.connected && !game.checkGameOver()) {
     game.update();
   }
-};
-
-const resetWinners = () => (winners = []);
-
-const recordWinner = () => {
-  const winner = game.allPlayers[0].name;
-  winners.push(winner);
-  console.log('Total games: ', winners.length, ':', statistics(winners)[1]);
-};
-
-const statistics = winners => {
-  let winCount = {};
-  winners.forEach(winner => {
-    if (winCount[winner]) winCount[winner]++;
-    else winCount[winner] = 1;
-  });
-  let percentage = {};
-  winners.forEach(winner => {
-    percentage[winner] =
-      Math.round((winCount[winner] / winners.length) * 100) + '%';
-  });
-  return [winCount, percentage];
 };
