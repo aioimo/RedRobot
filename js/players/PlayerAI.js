@@ -1,5 +1,5 @@
 class PlayerAI extends Player {
-  constructor(name, color, src = "", x = 0, y = 0) {
+  constructor(name, color, src = '', x = 0, y = 0) {
     super();
     this.name = name;
     this.color = color;
@@ -53,7 +53,7 @@ class PlayerAI extends Player {
   //and returns the best move (randomly breaks ties)
   determineBestMove() {
     let valueOfBestMove = maxInArray(Object.values(this.nextPossibleMoves));
-    let bestMoves = ["north", "east", "west", "south", "stay"].filter(
+    let bestMoves = ['north', 'east', 'west', 'south', 'stay'].filter(
       direction => {
         return this.nextPossibleMoves[direction] == valueOfBestMove;
       }
