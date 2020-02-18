@@ -128,7 +128,8 @@ class Drawing {
       );
     }
     this.ctx.translate(X_DISPLACEMENT, textBoxY + H_100 / 2);
-    this.drawRoundedBox(
+    drawRoundedBox(
+      this.ctx,
       BOX_SHADOW,
       BOX_SHADOW,
       textBoxWidth,
@@ -136,7 +137,8 @@ class Drawing {
       radius,
       'black'
     );
-    this.drawRoundedBox(
+    drawRoundedBox(
+      this.ctx,
       0,
       0,
       textBoxWidth,
@@ -322,55 +324,6 @@ class Drawing {
     this.ctx.fillText(textName, x + 60, yPosition);
     const textScore = player.score;
     this.ctx.fillText(textScore, x + 280 + INDENT, yPosition);
-    this.ctx.restore();
-  }
-
-  drawRoundedBox(x, y, totalWidth, totalHeight, radius, color = 'black') {
-    this.ctx.save();
-    let innerHeight = totalHeight - 2 * radius;
-    let innerWidth = totalWidth - 2 * radius;
-    this.ctx.fillStyle = color;
-    this.drawQuarterCircle(x + radius, y + radius, radius, Math.PI / 2, color);
-    this.drawQuarterCircle(
-      x + radius + innerWidth,
-      y + radius,
-      radius,
-      Math.PI,
-      color
-    );
-    this.drawQuarterCircle(
-      x + radius,
-      y + radius + innerHeight,
-      radius,
-      0,
-      color
-    );
-    this.drawQuarterCircle(
-      x + radius + innerWidth,
-      y + radius + innerHeight,
-      radius,
-      (3 * Math.PI) / 2,
-      color
-    );
-    this.ctx.fillRect(x, y + radius, totalWidth, innerHeight);
-    this.ctx.fillRect(x + radius, y, innerWidth, totalHeight);
-    this.ctx.restore();
-  }
-
-  drawQuarterCircle(x, y, radius, startAngle, color = 'black') {
-    this.ctx.save();
-    this.ctx.fillStyle = color;
-    this.ctx.beginPath();
-    this.ctx.arc(
-      x,
-      y,
-      radius,
-      Math.PI / 2 + startAngle,
-      Math.PI + startAngle,
-      false
-    );
-    this.ctx.lineTo(x, y);
-    this.ctx.fill();
     this.ctx.restore();
   }
 }
