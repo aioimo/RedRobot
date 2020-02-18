@@ -122,7 +122,7 @@ const handlePlayerMovement = e => {
       game.update();
     }
   }
-  while (!humanPlayer.connected && !game.checkGameOver()) {
-    game.update();
+  if (!humanPlayer.connected) {
+    handleGameWithoutHuman();
   }
 };
