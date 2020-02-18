@@ -3,7 +3,7 @@ class FairAI extends PlayerAI {
     super(name, color, src, x, y);
   }
 
-  evaluateCoordinate(y, x) {
+  evaluateCoordinate(y, x, tieBreaker = true) {
     if (
       y < 0 ||
       x < 0 ||
@@ -14,7 +14,7 @@ class FairAI extends PlayerAI {
       return -1;
     }
 
-    let r = Math.random();
+    let r = tieBreaker ? Math.random() : 0;
 
     if (this.checkIfBlank(game.world[y][x]) && r > 0.925) return 8;
     if (this.checkIfBlank(game.world[y][x])) return 2;
