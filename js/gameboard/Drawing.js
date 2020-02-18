@@ -199,24 +199,6 @@ class Drawing {
     this.ctx.restore();
   }
 
-  drawHalfCircleLeft({ x, y, radius = 20, color }) {
-    this.ctx.save();
-    this.ctx.fillStyle = color;
-    this.ctx.beginPath();
-    this.ctx.arc(x, y, radius, Math.PI / 2, (3 * Math.PI) / 2);
-    this.ctx.fill();
-    this.ctx.restore();
-  }
-
-  drawHalfCircleRight({ x, y, radius = 20, color }) {
-    this.ctx.save();
-    this.ctx.fillStyle = color;
-    this.ctx.beginPath();
-    this.ctx.arc(x, y, radius, Math.PI / 2, (3 * Math.PI) / 2, true);
-    this.ctx.fill();
-    this.ctx.restore();
-  }
-
   drawLeaderboardTitle(x, y, radius) {
     const HEIGHT = 2 * radius;
     const MAX_TEXT_SIZE = 25;
@@ -225,13 +207,15 @@ class Drawing {
     this.ctx.save();
     //background
     this.ctx.fillStyle = 'black';
-    this.drawHalfCircleLeft({
+    drawHalfCircleLeft({
+      ctx: this.ctx,
       x: x + BOX_SHADOW + radius,
       y: y + BOX_SHADOW + radius,
       color: 'black',
       radius
     });
-    this.drawHalfCircleRight({
+    drawHalfCircleRight({
+      ctx: this.ctx,
       x: x + BOX_SHADOW + W_100 - H_100 - X_DISPLACEMENT - radius,
       y: y + BOX_SHADOW + radius,
       color: 'black',
@@ -246,13 +230,15 @@ class Drawing {
 
     //The panel
     this.ctx.fillStyle = this.scoreBoardColor;
-    this.drawHalfCircleLeft({
+    drawHalfCircleLeft({
+      ctx: this.ctx,
       x: x + radius,
       y: y + radius,
       color: this.scoreBoardColor,
       radius
     });
-    this.drawHalfCircleRight({
+    drawHalfCircleRight({
+      ctx: this.ctx,
       x: x + W_100 - H_100 - X_DISPLACEMENT - radius,
       y: y + radius,
       color: this.scoreBoardColor,
@@ -283,13 +269,15 @@ class Drawing {
 
     // background
     this.ctx.fillStyle = 'black';
-    this.drawHalfCircleLeft({
+    drawHalfCircleLeft({
+      ctx: this.ctx,
       x: x + BOX_SHADOW + radius + INDENT,
       y: y + BOX_SHADOW + radius,
       color: 'black',
       radius
     });
-    this.drawHalfCircleRight({
+    drawHalfCircleRight({
+      ctx: this.ctx,
       x: x + BOX_SHADOW + W_100 - H_100 - X_DISPLACEMENT - radius,
       y: y + BOX_SHADOW + radius,
       color: 'black',
@@ -304,13 +292,15 @@ class Drawing {
 
     // The panel itself
     this.ctx.fillStyle = player.color;
-    this.drawHalfCircleLeft({
+    drawHalfCircleLeft({
+      ctx: this.ctx,
       x: x + radius + INDENT,
       y: y + radius,
       color: player.color,
       radius
     });
-    this.drawHalfCircleRight({
+    drawHalfCircleRight({
+      ctx: this.ctx,
       x: x + W_100 - H_100 - X_DISPLACEMENT - radius,
       y: y + radius,
       color: player.color,
