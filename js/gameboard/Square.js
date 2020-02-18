@@ -7,6 +7,14 @@ class Square {
     this.passable = passable;
   }
 
+  isOccupied() {
+    return this.occupyingPlayer != null;
+  }
+
+  isBlank() {
+    return this.color === null;
+  }
+
   addPlayerToSquare(player) {
     this.occupyingPlayer = player;
     this.color = player.color;

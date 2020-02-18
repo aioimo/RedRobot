@@ -15,45 +15,33 @@ class Drawing {
     this.ctx.clearRect(0, 0, W_100, H_100);
     this.ctx.fillStyle = this.backgroundColor;
     this.ctx.fillRect(0, 0, W_100, H_100);
+
+    // Draw the board, squares, and characters
     for (let row = 0; row < this.world.length; row++) {
       for (let col = 0; col < this.world[row].length; col++) {
-        if (this.world[row][col].occupyingPlayer != null) {
+        const square = this.world[row][col];
+        if (square.isOccupied()) {
           this.drawEmptySquare(row, col);
           this.drawCharacter(row, col);
-        } else if (this.world[row][col].color === null) {
+        } else if (square.isBlank()) {
           this.drawEmptySquare(row, col);
-        } else if (this.world[row][col].color != null) {
-          this.drawColoredSquare(row, col, this.world[row][col].color);
+        } else if (!square.isBlank()) {
+          this.drawColoredSquare(row, col, square.color);
         }
       }
     }
+
+    // Draw the impassable squares
     for (let row = 0; row < this.world.length; row++) {
       for (let col = 0; col < this.world[row].length; col++) {
-        if (
-          this.world[row][col].occupyingPlayer == null &&
-          !this.world[row][col].passable
-        ) {
+        const square = this.world[row][col];
+        if (!square.isOccupied() && !square.passable) {
           this.drawImpassableSquare(row, col);
         }
       }
     }
     this.drawScoreBoard({ allPlayers });
     this.drawStatusTextBox({ isGameOver, allPlayers, isRedRobotWinner });
-    // this.drawBorderAroundBoard();
-    this.ctx.restore();
-  }
-
-  drawBorderAroundBoard() {
-    this.ctx.save();
-    this.ctx.translate(BOARD_X_DISPLACEMENT, Y_DISPLACEMENT);
-    this.ctx.strokeStyle = 'black';
-    this.ctx.lineWidth = 2;
-    this.ctx.strokeRect(
-      -2,
-      -2,
-      this.squareSize * this.world.length + 4,
-      this.squareSize * this.world.length + 4
-    );
     this.ctx.restore();
   }
 
