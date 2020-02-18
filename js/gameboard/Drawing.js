@@ -179,8 +179,8 @@ class Drawing {
   drawScoreBoard({ allPlayers }) {
     this.ctx.save();
     const LEADERBOARD_HEIGHT = 40;
-    const SPACE_FROM_TITLE = 10;
-    const SPACE_BETWEEN_LINES = 12;
+    const LEADERBOARD_MARGIN_BOTTOM = 10;
+    const SPACE_BETWEEN_SCORES = 12;
     const SCORE_HEIGHT = 30;
 
     this.ctx.translate(X_DISPLACEMENT, Y_DISPLACEMENT);
@@ -190,8 +190,8 @@ class Drawing {
         x: 0,
         y:
           LEADERBOARD_HEIGHT +
-          SPACE_FROM_TITLE +
-          i * (SPACE_BETWEEN_LINES + SCORE_HEIGHT),
+          LEADERBOARD_MARGIN_BOTTOM +
+          i * (SPACE_BETWEEN_SCORES + SCORE_HEIGHT),
         player,
         radius: SCORE_HEIGHT / 2
       });
