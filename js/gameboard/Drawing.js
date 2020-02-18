@@ -1,4 +1,5 @@
-BORDER_WIDTH = 2;
+const BORDER_WIDTH = 2;
+const BOX_SHADOW = 2;
 
 class Drawing {
   constructor({ ctx, world, text, backgroundColor, scoreBoardColor }) {
@@ -115,7 +116,6 @@ class Drawing {
     const textBoxHeight = H_100 / 3 - 2 * Y_DISPLACEMENT;
     const textBoxY = 100;
     const radius = 25;
-    const shadowDisplacement = 2;
     if (isGameOver) {
       this.gameText = [];
       this.gameText.push('Round Over');
@@ -129,8 +129,8 @@ class Drawing {
     }
     this.ctx.translate(X_DISPLACEMENT, textBoxY + H_100 / 2);
     this.drawRoundedBox(
-      shadowDisplacement,
-      shadowDisplacement,
+      BOX_SHADOW,
+      BOX_SHADOW,
       textBoxWidth,
       textBoxHeight,
       radius,
@@ -219,7 +219,6 @@ class Drawing {
 
   drawLeaderboardTitle(x, y, radius) {
     const HEIGHT = 2 * radius;
-    const SHADOW_DISPLACEMENT = 2;
     const MAX_TEXT_SIZE = 25;
     const TEXT_SIZE = Math.min(radius, MAX_TEXT_SIZE);
 
@@ -227,20 +226,20 @@ class Drawing {
     //background
     this.ctx.fillStyle = 'black';
     this.drawHalfCircleLeft({
-      x: x + SHADOW_DISPLACEMENT + radius,
-      y: y + SHADOW_DISPLACEMENT + radius,
+      x: x + BOX_SHADOW + radius,
+      y: y + BOX_SHADOW + radius,
       color: 'black',
       radius
     });
     this.drawHalfCircleRight({
-      x: x + SHADOW_DISPLACEMENT + W_100 - H_100 - X_DISPLACEMENT - radius,
-      y: y + SHADOW_DISPLACEMENT + radius,
+      x: x + BOX_SHADOW + W_100 - H_100 - X_DISPLACEMENT - radius,
+      y: y + BOX_SHADOW + radius,
       color: 'black',
       radius
     });
     this.ctx.fillRect(
-      x + SHADOW_DISPLACEMENT + radius,
-      y + SHADOW_DISPLACEMENT,
+      x + BOX_SHADOW + radius,
+      y + BOX_SHADOW,
       W_100 - H_100 - X_DISPLACEMENT - HEIGHT,
       HEIGHT
     );
@@ -277,7 +276,6 @@ class Drawing {
   drawScorePanel({ x, y, player, radius = 30 }) {
     this.ctx.save();
 
-    const SHADOW_DISPLACEMENT = 2;
     const DIAMETER = 2 * radius;
     const INDENT = 10;
     const MAX_TEXT_SIZE = 20;
@@ -286,20 +284,20 @@ class Drawing {
     // background
     this.ctx.fillStyle = 'black';
     this.drawHalfCircleLeft({
-      x: x + SHADOW_DISPLACEMENT + radius + INDENT,
-      y: y + SHADOW_DISPLACEMENT + radius,
+      x: x + BOX_SHADOW + radius + INDENT,
+      y: y + BOX_SHADOW + radius,
       color: 'black',
       radius
     });
     this.drawHalfCircleRight({
-      x: x + SHADOW_DISPLACEMENT + W_100 - H_100 - X_DISPLACEMENT - radius,
-      y: y + SHADOW_DISPLACEMENT + radius,
+      x: x + BOX_SHADOW + W_100 - H_100 - X_DISPLACEMENT - radius,
+      y: y + BOX_SHADOW + radius,
       color: 'black',
       radius
     });
     this.ctx.fillRect(
-      x + SHADOW_DISPLACEMENT + radius + INDENT,
-      y + SHADOW_DISPLACEMENT,
+      x + BOX_SHADOW + radius + INDENT,
+      y + BOX_SHADOW,
       W_100 - H_100 - X_DISPLACEMENT - DIAMETER - INDENT,
       DIAMETER
     );
