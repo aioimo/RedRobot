@@ -1,4 +1,6 @@
 class Game {
+  BORDER_WIDTH = 2;
+
   constructor(
     ctx,
     world,
@@ -190,6 +192,8 @@ class Game {
   }
 
   drawEmptySquare(row, col) {
+    const { BORDER_WIDTH } = this;
+
     this.ctx.save();
     this.ctx.fillStyle = '#F0F0F0';
     // this.ctx.fillStyle = "#white";
@@ -197,7 +201,12 @@ class Game {
       gameBoardXDisplacement + this.squareSize * col,
       yDisplacement + this.squareSize * row
     );
-    this.ctx.fillRect(2, 2, this.squareSize - 4, this.squareSize - 4);
+    this.ctx.fillRect(
+      BORDER_WIDTH,
+      BORDER_WIDTH,
+      this.squareSize - 2 * BORDER_WIDTH,
+      this.squareSize - 2 * BORDER_WIDTH
+    );
 
     //LIGHT OUTLINE --
     // this.ctx.strokeStyle="RGBA(0,0,0,0.1)"
@@ -207,6 +216,8 @@ class Game {
   }
 
   drawColoredSquare(row, col, color) {
+    const { BORDER_WIDTH } = this;
+
     this.ctx.save();
     this.ctx.fillStyle = color;
     this.ctx.strokeStyle = 'white';
@@ -214,7 +225,12 @@ class Game {
       gameBoardXDisplacement + this.squareSize * col,
       yDisplacement + this.squareSize * row
     );
-    this.ctx.fillRect(2, 2, this.squareSize - 4, this.squareSize - 4);
+    this.ctx.fillRect(
+      BORDER_WIDTH,
+      BORDER_WIDTH,
+      this.squareSize - 2 * BORDER_WIDTH,
+      this.squareSize - 2 * BORDER_WIDTH
+    );
     this.ctx.strokeRect(0, 0, this.squareSize, this.squareSize);
     this.ctx.restore();
   }
@@ -254,7 +270,10 @@ class Game {
   drawStatusTextBox() {
     this.ctx.save();
     const textBoxWidth = width - height - xDisplacement;
-    const textBoxHeight = height / 2 - 2 * yDisplacement;
+    const textBoxHeight = height / 3 - 2 * yDisplacement;
+    const textBoxY = 100;
+    const radius = 25;
+    const shadowDisplacement = 2;
     if (this.checkGameOver()) {
       this.gameText = [];
       this.gameText.push('Round Over');
@@ -266,19 +285,26 @@ class Game {
         'Click the button the right to play level ' + (levelCounter + 2)
       );
     }
-    this.ctx.translate(xDisplacement, 40 + height / 2);
-    this.drawRoundedBox(2, 2, textBoxWidth, textBoxHeight, 25, 'black');
+    this.ctx.translate(xDisplacement, textBoxY + height / 2);
+    this.drawRoundedBox(
+      shadowDisplacement,
+      shadowDisplacement,
+      textBoxWidth,
+      textBoxHeight,
+      radius,
+      'black'
+    );
     this.drawRoundedBox(
       0,
       0,
       textBoxWidth,
       textBoxHeight,
-      25,
+      radius,
       this.scoreBoardColor
     );
 
     //draw title
-    this.ctx.font = '26px PokemonGB';
+    this.ctx.font = '18px PokemonGB';
     this.ctx.textAlign = 'center';
     this.ctx.fillStyle = 'white';
     wrapText(
@@ -291,7 +317,7 @@ class Game {
     );
 
     //draw other text
-    this.ctx.font = '14px PokemonGB';
+    this.ctx.font = '12px PokemonGB';
     this.ctx.textAlign = 'left';
     this.ctx.fillStyle = 'white';
     for (let i = 1; i < this.gameText.length; i++) {
@@ -301,7 +327,7 @@ class Game {
         20,
         35 + 50 * i,
         textBoxWidth - 20,
-        25
+        10
       );
     }
 
@@ -310,114 +336,162 @@ class Game {
 
   drawScoreBoard() {
     this.ctx.save();
+    const LEADERBOARD_HEIGHT = 40;
+    const SPACE_FROM_TITLE = 10;
+    const SPACE_BETWEEN_LINES = 12;
+    const SCORE_HEIGHT = 30;
+
     this.ctx.translate(xDisplacement, yDisplacement);
-    let indent = 30;
-    this.drawOvalShape(0, 0);
-    for (let i = 0; i < this.allPlayers.length; i++) {
-      this.drawScorePanel(0, 60 + i * 50, this.allPlayers[i]);
-    }
+    this.drawLeaderboardTitle(0, 0, LEADERBOARD_HEIGHT / 2);
+    this.allPlayers.forEach((player, i) => {
+      this.drawScorePanel({
+        x: 0,
+        y:
+          LEADERBOARD_HEIGHT +
+          SPACE_FROM_TITLE +
+          i * (SPACE_BETWEEN_LINES + SCORE_HEIGHT),
+        player,
+        radius: SCORE_HEIGHT / 2
+      });
+    });
     this.ctx.restore();
   }
 
-  drawHalfCircleLeft(x, y, color) {
+  drawHalfCircleLeft({ x, y, radius = 20, color }) {
     this.ctx.save();
     this.ctx.fillStyle = color;
     this.ctx.beginPath();
-    this.ctx.arc(x, y, 20, Math.PI / 2, (3 * Math.PI) / 2);
+    this.ctx.arc(x, y, radius, Math.PI / 2, (3 * Math.PI) / 2);
     this.ctx.fill();
     this.ctx.restore();
   }
 
-  drawHalfCircleRight(x, y, color) {
+  drawHalfCircleRight({ x, y, radius = 20, color }) {
     this.ctx.save();
     this.ctx.fillStyle = color;
     this.ctx.beginPath();
-    this.ctx.arc(x, y, 20, Math.PI / 2, (3 * Math.PI) / 2, true);
+    this.ctx.arc(x, y, radius, Math.PI / 2, (3 * Math.PI) / 2, true);
     this.ctx.fill();
     this.ctx.restore();
   }
 
-  drawOvalShape(x, y) {
+  drawLeaderboardTitle(x, y, radius) {
+    const HEIGHT = 2 * radius;
+    const SHADOW_DISPLACEMENT = 2;
+    const MAX_TEXT_SIZE = 25;
+    const TEXT_SIZE = Math.min(radius, MAX_TEXT_SIZE);
+
     this.ctx.save();
-    let radius = 20;
     //background
     this.ctx.fillStyle = 'black';
-    this.drawHalfCircleLeft(x + 2 + radius, y + 2 + radius, 'black');
-    this.drawHalfCircleRight(
-      x + 2 + width - height - xDisplacement - radius,
-      y + 2 + radius,
-      'black'
-    );
+    this.drawHalfCircleLeft({
+      x: x + SHADOW_DISPLACEMENT + radius,
+      y: y + SHADOW_DISPLACEMENT + radius,
+      color: 'black',
+      radius
+    });
+    this.drawHalfCircleRight({
+      x: x + SHADOW_DISPLACEMENT + width - height - xDisplacement - radius,
+      y: y + SHADOW_DISPLACEMENT + radius,
+      color: 'black',
+      radius
+    });
     this.ctx.fillRect(
-      x + 2 + radius,
-      y + 2,
-      width - height - xDisplacement - 2 * radius,
-      40
+      x + SHADOW_DISPLACEMENT + radius,
+      y + SHADOW_DISPLACEMENT,
+      width - height - xDisplacement - HEIGHT,
+      HEIGHT
     );
 
     //The panel
     this.ctx.fillStyle = this.scoreBoardColor;
-    this.drawHalfCircleLeft(x + radius, y + radius, this.scoreBoardColor);
-    this.drawHalfCircleRight(
-      x + width - height - xDisplacement - radius,
-      y + radius,
-      this.scoreBoardColor
-    );
+    this.drawHalfCircleLeft({
+      x: x + radius,
+      y: y + radius,
+      color: this.scoreBoardColor,
+      radius
+    });
+    this.drawHalfCircleRight({
+      x: x + width - height - xDisplacement - radius,
+      y: y + radius,
+      color: this.scoreBoardColor,
+      radius
+    });
     this.ctx.fillRect(
       x + radius,
       y,
-      width - height - xDisplacement - 2 * radius,
-      40
+      width - height - xDisplacement - HEIGHT,
+      HEIGHT
     );
 
     //Text
     this.ctx.fillStyle = 'white';
-    this.ctx.font = '24px PokemonGB';
+    this.ctx.font = `${TEXT_SIZE}px PokemonGB`;
     let text = 'Leaderboard:';
-    this.ctx.fillText(text, x + 60, y + 30);
+    this.ctx.fillText(text, x + 60, y + radius + 0.5 * TEXT_SIZE);
     this.ctx.restore();
   }
 
-  drawScorePanel(x, y, player) {
+  drawScorePanel({ x, y, player, radius = 30 }) {
     this.ctx.save();
-    let radius = 20;
-    //background
+
+    const SHADOW_DISPLACEMENT = 2;
+    const DIAMETER = 2 * radius;
+    const INDENT = 10;
+    const MAX_TEXT_SIZE = 20;
+    const TEXT_SIZE = Math.min(0.75 * radius, MAX_TEXT_SIZE);
+
+    // background
     this.ctx.fillStyle = 'black';
-    this.drawHalfCircleLeft(x + 2 + radius + 30, y + 2 + radius, 'black');
-    this.drawHalfCircleRight(
-      x + 2 + width - height - xDisplacement - radius,
-      y + 2 + radius,
-      'black'
-    );
+    this.drawHalfCircleLeft({
+      x: x + SHADOW_DISPLACEMENT + radius + INDENT,
+      y: y + SHADOW_DISPLACEMENT + radius,
+      color: 'black',
+      radius
+    });
+    this.drawHalfCircleRight({
+      x: x + SHADOW_DISPLACEMENT + width - height - xDisplacement - radius,
+      y: y + SHADOW_DISPLACEMENT + radius,
+      color: 'black',
+      radius
+    });
     this.ctx.fillRect(
-      x + 2 + radius + 30,
-      y + 2,
-      width - height - xDisplacement - 2 * radius - 30,
-      40
+      x + SHADOW_DISPLACEMENT + radius + INDENT,
+      y + SHADOW_DISPLACEMENT,
+      width - height - xDisplacement - DIAMETER - INDENT,
+      DIAMETER
     );
 
-    //The panel
+    // The panel itself
     this.ctx.fillStyle = player.color;
-    this.drawHalfCircleLeft(x + radius + 30, y + radius, player.color);
-    this.drawHalfCircleRight(
-      x + width - height - xDisplacement - radius,
-      y + radius,
-      player.color
-    );
+    this.drawHalfCircleLeft({
+      x: x + radius + INDENT,
+      y: y + radius,
+      color: player.color,
+      radius
+    });
+    this.drawHalfCircleRight({
+      x: x + width - height - xDisplacement - radius,
+      y: y + radius,
+      color: player.color,
+      radius
+    });
     this.ctx.fillRect(
-      x + radius + 30,
+      x + radius + INDENT,
       y,
-      width - height - xDisplacement - 2 * radius - 30,
-      40
+      width - height - xDisplacement - DIAMETER - INDENT,
+      DIAMETER
     );
 
     //Text
     this.ctx.fillStyle = 'white';
-    this.ctx.font = '12px PokemonGB';
-    let textName = player.name;
-    this.ctx.fillText(textName, x + 60, y + 30);
-    let textScore = player.score;
-    this.ctx.fillText(textScore, x + 280 + 30, y + 30);
+    this.ctx.font = `${TEXT_SIZE}px PokemonGB`;
+    const textName = player.name;
+    const yPosition = y + radius + 0.5 * TEXT_SIZE;
+    //   this.ctx.fillText(text, x + 60, y + radius + 0.5 * TEXT_SIZE);
+    this.ctx.fillText(textName, x + 60, yPosition);
+    const textScore = player.score;
+    this.ctx.fillText(textScore, x + 280 + INDENT, yPosition);
     this.ctx.restore();
   }
 
