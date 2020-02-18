@@ -1,6 +1,6 @@
-class Drawing {
-  BORDER_WIDTH = 2;
+BORDER_WIDTH = 2;
 
+class Drawing {
   constructor({ ctx, world, text, backgroundColor, scoreBoardColor }) {
     this.ctx = ctx;
     this.world = world;
@@ -58,8 +58,6 @@ class Drawing {
   }
 
   drawEmptySquare(row, col) {
-    const { BORDER_WIDTH } = this;
-
     this.ctx.save();
     this.ctx.fillStyle = '#F0F0F0';
     // this.ctx.fillStyle = "#white";
@@ -82,8 +80,6 @@ class Drawing {
   }
 
   drawColoredSquare(row, col, color) {
-    const { BORDER_WIDTH } = this;
-
     this.ctx.save();
     this.ctx.fillStyle = color;
     this.ctx.strokeStyle = 'white';
