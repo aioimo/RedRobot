@@ -7,14 +7,14 @@ class Drawing {
     this.gameText = text;
     this.backgroundColor = backgroundColor;
     this.scoreBoardColor = scoreBoardColor;
-    this.squareSize = (height - 2 * yDisplacement) / this.world.length;
+    this.squareSize = (H_100 - 2 * Y_DISPLACEMENT) / this.world.length;
   }
 
   draw({ allPlayers, isGameOver, isRedRobotWinner }) {
     this.ctx.save();
-    this.ctx.clearRect(0, 0, width, height);
+    this.ctx.clearRect(0, 0, W_100, H_100);
     this.ctx.fillStyle = this.backgroundColor;
-    this.ctx.fillRect(0, 0, width, height);
+    this.ctx.fillRect(0, 0, W_100, H_100);
     for (let row = 0; row < this.world.length; row++) {
       for (let col = 0; col < this.world[row].length; col++) {
         if (this.world[row][col].occupyingPlayer != null) {
@@ -45,7 +45,7 @@ class Drawing {
 
   drawBorderAroundBoard() {
     this.ctx.save();
-    this.ctx.translate(gameBoardXDisplacement, yDisplacement);
+    this.ctx.translate(BOARD_X_DISPLACEMENT, Y_DISPLACEMENT);
     this.ctx.strokeStyle = 'black';
     this.ctx.lineWidth = 2;
     this.ctx.strokeRect(
@@ -62,8 +62,8 @@ class Drawing {
     this.ctx.fillStyle = '#F0F0F0';
     // this.ctx.fillStyle = "#white";
     this.ctx.translate(
-      gameBoardXDisplacement + this.squareSize * col,
-      yDisplacement + this.squareSize * row
+      BOARD_X_DISPLACEMENT + this.squareSize * col,
+      Y_DISPLACEMENT + this.squareSize * row
     );
     this.ctx.fillRect(
       BORDER_WIDTH,
@@ -74,7 +74,7 @@ class Drawing {
 
     //LIGHT OUTLINE --
     // this.ctx.strokeStyle="RGBA(0,0,0,0.1)"
-    // this.ctx.translate(gameBoardXDisplacement+this.squareSize*col,yDisplacement+this.squareSize*row);
+    // this.ctx.translate(BOARD_X_DISPLACEMENT+this.squareSize*col,Y_DISPLACEMENT+this.squareSize*row);
     // this.ctx.strokeRect(0,0,this.squareSize,this.squareSize);
     this.ctx.restore();
   }
@@ -84,8 +84,8 @@ class Drawing {
     this.ctx.fillStyle = color;
     this.ctx.strokeStyle = 'white';
     this.ctx.translate(
-      gameBoardXDisplacement + this.squareSize * col,
-      yDisplacement + this.squareSize * row
+      BOARD_X_DISPLACEMENT + this.squareSize * col,
+      Y_DISPLACEMENT + this.squareSize * row
     );
     this.ctx.fillRect(
       BORDER_WIDTH,
@@ -102,8 +102,8 @@ class Drawing {
     this.ctx.strokeStyle = 'black';
     this.ctx.lineWidth = 4;
     this.ctx.translate(
-      gameBoardXDisplacement + this.squareSize * col,
-      yDisplacement + this.squareSize * row
+      BOARD_X_DISPLACEMENT + this.squareSize * col,
+      Y_DISPLACEMENT + this.squareSize * row
     );
     this.ctx.strokeRect(0, 0, this.squareSize, this.squareSize);
     this.ctx.restore();
@@ -112,8 +112,8 @@ class Drawing {
   drawCharacter(row, col) {
     this.ctx.save();
     this.ctx.translate(
-      gameBoardXDisplacement + this.squareSize * col,
-      yDisplacement + this.squareSize * row
+      BOARD_X_DISPLACEMENT + this.squareSize * col,
+      Y_DISPLACEMENT + this.squareSize * row
     );
     this.ctx.drawImage(
       this.world[row][col].occupyingPlayer.img,
@@ -127,8 +127,8 @@ class Drawing {
 
   drawStatusTextBox({ isGameOver, allPlayers, isRedRobotWinner }) {
     this.ctx.save();
-    const textBoxWidth = width - height - xDisplacement;
-    const textBoxHeight = height / 3 - 2 * yDisplacement;
+    const textBoxWidth = W_100 - H_100 - X_DISPLACEMENT;
+    const textBoxHeight = H_100 / 3 - 2 * Y_DISPLACEMENT;
     const textBoxY = 100;
     const radius = 25;
     const shadowDisplacement = 2;
@@ -143,7 +143,7 @@ class Drawing {
         'Click the button the right to play level ' + (levelCounter + 2)
       );
     }
-    this.ctx.translate(xDisplacement, textBoxY + height / 2);
+    this.ctx.translate(X_DISPLACEMENT, textBoxY + H_100 / 2);
     this.drawRoundedBox(
       shadowDisplacement,
       shadowDisplacement,
@@ -199,7 +199,7 @@ class Drawing {
     const SPACE_BETWEEN_LINES = 12;
     const SCORE_HEIGHT = 30;
 
-    this.ctx.translate(xDisplacement, yDisplacement);
+    this.ctx.translate(X_DISPLACEMENT, Y_DISPLACEMENT);
     this.drawLeaderboardTitle(0, 0, LEADERBOARD_HEIGHT / 2);
     allPlayers.forEach((player, i) => {
       this.drawScorePanel({
@@ -249,7 +249,7 @@ class Drawing {
       radius
     });
     this.drawHalfCircleRight({
-      x: x + SHADOW_DISPLACEMENT + width - height - xDisplacement - radius,
+      x: x + SHADOW_DISPLACEMENT + W_100 - H_100 - X_DISPLACEMENT - radius,
       y: y + SHADOW_DISPLACEMENT + radius,
       color: 'black',
       radius
@@ -257,7 +257,7 @@ class Drawing {
     this.ctx.fillRect(
       x + SHADOW_DISPLACEMENT + radius,
       y + SHADOW_DISPLACEMENT,
-      width - height - xDisplacement - HEIGHT,
+      W_100 - H_100 - X_DISPLACEMENT - HEIGHT,
       HEIGHT
     );
 
@@ -270,7 +270,7 @@ class Drawing {
       radius
     });
     this.drawHalfCircleRight({
-      x: x + width - height - xDisplacement - radius,
+      x: x + W_100 - H_100 - X_DISPLACEMENT - radius,
       y: y + radius,
       color: this.scoreBoardColor,
       radius
@@ -278,7 +278,7 @@ class Drawing {
     this.ctx.fillRect(
       x + radius,
       y,
-      width - height - xDisplacement - HEIGHT,
+      W_100 - H_100 - X_DISPLACEMENT - HEIGHT,
       HEIGHT
     );
 
@@ -308,7 +308,7 @@ class Drawing {
       radius
     });
     this.drawHalfCircleRight({
-      x: x + SHADOW_DISPLACEMENT + width - height - xDisplacement - radius,
+      x: x + SHADOW_DISPLACEMENT + W_100 - H_100 - X_DISPLACEMENT - radius,
       y: y + SHADOW_DISPLACEMENT + radius,
       color: 'black',
       radius
@@ -316,7 +316,7 @@ class Drawing {
     this.ctx.fillRect(
       x + SHADOW_DISPLACEMENT + radius + INDENT,
       y + SHADOW_DISPLACEMENT,
-      width - height - xDisplacement - DIAMETER - INDENT,
+      W_100 - H_100 - X_DISPLACEMENT - DIAMETER - INDENT,
       DIAMETER
     );
 
@@ -329,7 +329,7 @@ class Drawing {
       radius
     });
     this.drawHalfCircleRight({
-      x: x + width - height - xDisplacement - radius,
+      x: x + W_100 - H_100 - X_DISPLACEMENT - radius,
       y: y + radius,
       color: player.color,
       radius
@@ -337,7 +337,7 @@ class Drawing {
     this.ctx.fillRect(
       x + radius + INDENT,
       y,
-      width - height - xDisplacement - DIAMETER - INDENT,
+      W_100 - H_100 - X_DISPLACEMENT - DIAMETER - INDENT,
       DIAMETER
     );
 

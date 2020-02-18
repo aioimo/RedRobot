@@ -1,12 +1,11 @@
 //Setup the Canvas and its dimensions
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
-const width = canvas.width;
-const height = canvas.height;
+const W_100 = canvas.width;
+const H_100 = canvas.height;
 
 //Setup global variables for layout
-const xDisplacement = 30;
-const yDisplacement = 30;
+const X_DISPLACEMENT = 60;
+const Y_DISPLACEMENT = 60;
 
-const gameBoardXDisplacement = width - height + xDisplacement;
-const gameBoardYDisplacement = yDisplacement;
+const BOARD_X_DISPLACEMENT = W_100 - H_100 + X_DISPLACEMENT;
