@@ -60,10 +60,6 @@ class Drawing {
       this.squareSize - 2 * BORDER_WIDTH
     );
 
-    //LIGHT OUTLINE --
-    // this.ctx.strokeStyle="RGBA(0,0,0,0.1)"
-    // this.ctx.translate(BOARD_X_DISPLACEMENT+this.squareSize*col,Y_DISPLACEMENT+this.squareSize*row);
-    // this.ctx.strokeRect(0,0,this.squareSize,this.squareSize);
     this.ctx.restore();
   }
 
