@@ -195,5 +195,43 @@ const levels = [
     starterText: ['Round 9', 'i.e. the Final Round'],
     scoreBoardColor: 'black',
     backgroundColor: 'white'
+  },
+  {
+    level: 10,
+    mapSize: 24,
+    humanPlayer: [new Player()],
+    computerOpponents: [
+      new EasyAI('Another Pigeon', '#009ACD', './images/pigeon.png', 0, 12),
+
+      new PlayerAI('Owl', '#DCEDFF', './images/owl.png', 7, 16),
+      new PlayerAI('Pink Peacock', 'pink', './images/pinkPeacock.png', 0, 0),
+      new FairAI('Lion', 'orange', './images/lion2.png', 23, 23),
+      new PlayerAI(
+        'Capuchin Monkey',
+        '#335C67',
+        './images/capuchinMonkey.png',
+        22,
+        7
+      ),
+      new PlayerAI(
+        'Green Gorillas',
+        'green',
+        './images/greenGorilla.png',
+        19,
+        3
+      ),
+      new FairAI(
+        'Monarch Butterfly',
+        '#E6AF2E',
+        './images/monarchButterfly.png',
+        11,
+        11
+      ),
+      new PlayerAI('Elephant', '#698196', './images/elephant.png', 13, 0)
+    ],
+    maximumDuration: 120,
+    starterText: ['Round 10', 'an experimental round'],
+    scoreBoardColor: 'black',
+    backgroundColor: 'white'
   }
 ];
