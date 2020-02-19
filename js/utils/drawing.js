@@ -68,3 +68,24 @@ function drawRoundedBox(
   ctx.fillRect(x + radius, y, innerWidth, totalHeight);
   ctx.restore();
 }
+
+function drawRoundedBoard({
+  ctx,
+  boxShadow,
+  width,
+  height,
+  radius,
+  color,
+  backgroundColor = 'black'
+}) {
+  drawRoundedBox(
+    ctx,
+    boxShadow,
+    boxShadow,
+    width,
+    height,
+    radius,
+    backgroundColor
+  );
+  drawRoundedBox(ctx, 0, 0, width, height, radius, color);
+}

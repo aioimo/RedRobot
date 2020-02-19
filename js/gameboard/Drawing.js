@@ -128,24 +128,14 @@ class Drawing {
       );
     }
     this.ctx.translate(X_DISPLACEMENT, textBoxY + H_100 / 2);
-    drawRoundedBox(
-      this.ctx,
-      BOX_SHADOW,
-      BOX_SHADOW,
-      textBoxWidth,
-      textBoxHeight,
+    drawRoundedBoard({
+      ctx: this.ctx,
+      boxShadow: BOX_SHADOW,
+      width: textBoxWidth,
+      height: textBoxHeight,
       radius,
-      'black'
-    );
-    drawRoundedBox(
-      this.ctx,
-      0,
-      0,
-      textBoxWidth,
-      textBoxHeight,
-      radius,
-      this.scoreBoardColor
-    );
+      color: this.scoreBoardColor
+    });
 
     //draw title
     this.ctx.font = '18px PokemonGB';
