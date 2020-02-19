@@ -54,9 +54,7 @@ class PlayerAI extends Player {
   determineBestMove() {
     let valueOfBestMove = maxInArray(Object.values(this.nextPossibleMoves));
     let bestMoves = ['north', 'east', 'west', 'south', 'stay'].filter(
-      direction => {
-        return this.nextPossibleMoves[direction] == valueOfBestMove;
-      }
+      direction => this.nextPossibleMoves[direction] == valueOfBestMove
     );
     let r = Math.floor(Math.random() * bestMoves.length);
     return bestMoves[r];
