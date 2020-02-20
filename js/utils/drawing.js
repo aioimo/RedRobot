@@ -26,18 +26,10 @@ function drawQuarterCircle(ctx, x, y, radius, startAngle, color = 'black') {
   ctx.restore();
 }
 
-function drawRoundedBox(
-  ctx,
-  x,
-  y,
-  totalWidth,
-  totalHeight,
-  radius,
-  color = 'black'
-) {
+function drawRoundedBox(ctx, x, y, width, height, radius, color = 'black') {
   ctx.save();
-  let innerHeight = totalHeight - 2 * radius;
-  let innerWidth = totalWidth - 2 * radius;
+  let innerHeight = height - 2 * radius;
+  let innerWidth = width - 2 * radius;
   ctx.fillStyle = color;
   drawQuarterCircle(ctx, x + radius, y + radius, radius, Math.PI / 2, color);
   drawQuarterCircle(
@@ -64,8 +56,8 @@ function drawRoundedBox(
     (3 * Math.PI) / 2,
     color
   );
-  ctx.fillRect(x, y + radius, totalWidth, innerHeight);
-  ctx.fillRect(x + radius, y, innerWidth, totalHeight);
+  ctx.fillRect(x, y + radius, width, innerHeight);
+  ctx.fillRect(x + radius, y, innerWidth, height);
   ctx.restore();
 }
 
