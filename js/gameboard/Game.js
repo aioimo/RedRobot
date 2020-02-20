@@ -15,6 +15,7 @@ class Game {
     this.computerPlayers = computerPlayers;
     this.allPlayers = [...this.humanPlayers, ...this.computerPlayers];
     this.maxDuration = maxDuration;
+    this.turnCounter = 0;
     this.drawing = new Drawing({
       ctx,
       world,
@@ -28,7 +29,8 @@ class Game {
     this.drawing.draw({
       allPlayers: this.allPlayers,
       isGameOver: this.checkGameOver(),
-      isRedRobotWinner: this.checkRedRobotWin()
+      isRedRobotWinner: this.checkRedRobotWin(),
+      turnCounter: this.turnCounter
     });
   }
 
@@ -41,6 +43,7 @@ class Game {
   }
 
   update() {
+    this.turnCounter++;
     this.moveAllComps();
     this.determineScores();
     this.reorderByScore(this.computerPlayers);
@@ -74,7 +77,7 @@ class Game {
     for (let row = 0; row < this.world.length; row++) {
       for (let col = 0; col < this.world.length; col++) {
         const square = this.world[row][col];
-        if (square.color != null && square.passable) {
+        if (square.isColored() && square.passable) {
           square.duration++;
           if (square.duration > this.maxDuration) {
             square.passable = false;
@@ -102,10 +105,14 @@ class Game {
     }
   }
 
-  determineScores() {
+  startCountingAtZero() {
     this.allPlayers.forEach(player => {
       player.score = 0;
     });
+  }
+
+  determineScores() {
+    this.startCountingAtZero();
     for (let row = 0; row < this.world.length; row++) {
       for (let col = 0; col < this.world[row].length; col++) {
         const color = this.world[row][col].color;
@@ -136,7 +143,8 @@ class Game {
   noMoreEmptySpaces() {
     for (let row = 0; row < this.world.length; row++) {
       for (let col = 0; col < this.world[row].length; col++) {
-        if (this.world[row][col].color === null) return false;
+        const square = this.world[row][col];
+        if (square.isBlank()) return false;
       }
     }
     return true;

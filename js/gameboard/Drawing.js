@@ -11,7 +11,7 @@ class Drawing {
     this.squareSize = (H_100 - 2 * Y_DISPLACEMENT) / this.world.length;
   }
 
-  draw({ allPlayers, isGameOver, isRedRobotWinner }) {
+  draw({ allPlayers, isGameOver, isRedRobotWinner, turnCounter }) {
     this.ctx.save();
     this.ctx.clearRect(0, 0, W_100, H_100);
     this.ctx.fillStyle = this.backgroundColor;
@@ -42,7 +42,12 @@ class Drawing {
       }
     }
     this.drawScoreBoard({ allPlayers });
-    this.drawStatusTextBox({ isGameOver, allPlayers, isRedRobotWinner });
+    this.drawStatusTextBox({
+      isGameOver,
+      allPlayers,
+      isRedRobotWinner,
+      turnCounter
+    });
     this.ctx.restore();
   }
 
@@ -110,16 +115,17 @@ class Drawing {
     this.ctx.restore();
   }
 
-  drawStatusTextBox({ isGameOver, allPlayers, isRedRobotWinner }) {
+  drawStatusTextBox({ isGameOver, allPlayers, isRedRobotWinner, turnCounter }) {
     this.ctx.save();
     const textBoxWidth = W_100 - H_100 - X_DISPLACEMENT;
-    const textBoxHeight = H_100 / 3 - 2 * Y_DISPLACEMENT;
-    const textBoxY = 100;
+    const textBoxHeight = H_100 / 3 - Y_DISPLACEMENT + 50;
+    const textBoxY = 75;
     const radius = 25;
     if (isGameOver) {
       this.gameText = [];
       this.gameText.push('Round Over');
       this.gameText.push('Winner is ' + allPlayers[0].name);
+      this.gameText.push(`Turn: ${turnCounter}`);
     }
     if (isRedRobotWinner) {
       this.gameText.push('Congratulations!');
