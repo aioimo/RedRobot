@@ -1,5 +1,5 @@
 class MediumAI extends PlayerAI {
-  constructor(name, color, src = "", x = 0, y = 0) {
+  constructor(name, color, src = '', x = 0, y = 0) {
     super(name, color, src, x, y);
   }
 
@@ -13,10 +13,11 @@ class MediumAI extends PlayerAI {
     ) {
       return -1;
     }
-    if (this.checkIfBlank(game.world[y][x])) return 2;
-    if (this.checkIfOwnColor(game.world[y][x])) return 1;
-    if (this.checkIfLeadingPlayersColor(game.world[y][x])) return 2;
-    if (this.checkIfOpponentsColor(game.world[y][x])) return 2;
+    const square = game.world[y][x];
+    if (this.checkIfBlank(square)) return 2;
+    if (this.checkIfOwnColor(square)) return 1;
+    if (this.checkIfLeadingPlayersColor(square)) return 2;
+    if (this.checkIfOpponentsColor(square)) return 2;
     else return 1;
   }
 }

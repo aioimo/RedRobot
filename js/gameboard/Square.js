@@ -15,6 +15,10 @@ class Square {
     return this.color === null;
   }
 
+  isColored() {
+    return this.color !== null;
+  }
+
   addPlayerToSquare(player) {
     this.occupyingPlayer = player;
     this.color = player.color;

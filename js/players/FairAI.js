@@ -15,12 +15,12 @@ class FairAI extends PlayerAI {
     }
 
     const r = tieBreaker ? Math.random() : 0;
-
-    if (this.checkIfBlank(game.world[y][x]) && r > 0.925) return 8;
-    if (this.checkIfBlank(game.world[y][x])) return 2;
-    if (this.checkIfOwnColor(game.world[y][x])) return 1;
-    if (this.checkIfLeadingPlayersColor(game.world[y][x])) return 5;
-    if (this.checkIfOpponentsColor(game.world[y][x])) return 3;
+    const square = game.world[y][x];
+    if (this.checkIfBlank(square) && r > 0.925) return 8;
+    if (this.checkIfBlank(square)) return 2;
+    if (this.checkIfOwnColor(square)) return 1;
+    if (this.checkIfLeadingPlayersColor(square)) return 5;
+    if (this.checkIfOpponentsColor(square)) return 3;
     else return 1;
   }
 }
