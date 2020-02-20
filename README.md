@@ -40,7 +40,7 @@ Do not change the `evaluateCoordinate(y,x)` method of the `Player`class or risk 
 
 The game has 9 levels, but creating your own new level is straightforward. You have to add a Level object (like below) to the levels array in the `js/levels.js` file.
 
-```json
+```js
 {
   "level": 10,
 
