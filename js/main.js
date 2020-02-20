@@ -90,38 +90,35 @@ const handleGameWithoutHuman = () => {
 //Handle Logic for Human Player Movement
 const handlePlayerMovement = e => {
   e.preventDefault();
-  const humanPlayer = game.humanPlayers[0];
-  if (!game.checkGameOver()) {
-    if (e.key === 'ArrowUp') {
-      if (
-        humanPlayer.evaluateCoordinate(humanPlayer.y - 1, humanPlayer.x) > 0
-      ) {
-        humanPlayer.executeMove('north');
-      }
-      game.update();
-    } else if (e.key === 'ArrowDown') {
-      if (
-        humanPlayer.evaluateCoordinate(humanPlayer.y + 1, humanPlayer.x) > 0
-      ) {
-        humanPlayer.executeMove('south');
-      }
-      game.update();
-    } else if (e.key === 'ArrowRight') {
-      if (
-        humanPlayer.evaluateCoordinate(humanPlayer.y, humanPlayer.x + 1) > 0
-      ) {
-        humanPlayer.executeMove('east');
-      }
-      game.update();
-    } else if (e.key === 'ArrowLeft') {
-      if (
-        humanPlayer.evaluateCoordinate(humanPlayer.y, humanPlayer.x - 1) > 0
-      ) {
-        humanPlayer.executeMove('west');
-      }
-      game.update();
-    }
+
+  if (game.checkGameOver()) {
+    return;
   }
+
+  const humanPlayer = game.humanPlayers[0];
+
+  if (e.key === 'ArrowUp') {
+    if (humanPlayer.evaluateCoordinate(humanPlayer.y - 1, humanPlayer.x) > 0) {
+      humanPlayer.executeMove('north');
+    }
+    game.update();
+  } else if (e.key === 'ArrowDown') {
+    if (humanPlayer.evaluateCoordinate(humanPlayer.y + 1, humanPlayer.x) > 0) {
+      humanPlayer.executeMove('south');
+    }
+    game.update();
+  } else if (e.key === 'ArrowRight') {
+    if (humanPlayer.evaluateCoordinate(humanPlayer.y, humanPlayer.x + 1) > 0) {
+      humanPlayer.executeMove('east');
+    }
+    game.update();
+  } else if (e.key === 'ArrowLeft') {
+    if (humanPlayer.evaluateCoordinate(humanPlayer.y, humanPlayer.x - 1) > 0) {
+      humanPlayer.executeMove('west');
+    }
+    game.update();
+  }
+
   if (!humanPlayer.connected) {
     handleGameWithoutHuman();
   }
