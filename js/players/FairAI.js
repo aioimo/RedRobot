@@ -14,7 +14,7 @@ class FairAI extends PlayerAI {
       return -1;
     }
 
-    let r = tieBreaker ? Math.random() : 0;
+    const r = tieBreaker ? Math.random() : 0;
 
     if (this.checkIfBlank(game.world[y][x]) && r > 0.925) return 8;
     if (this.checkIfBlank(game.world[y][x])) return 2;

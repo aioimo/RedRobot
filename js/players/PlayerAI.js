@@ -33,7 +33,7 @@ class PlayerAI extends Player {
       return -1;
     }
 
-    let r = Math.random();
+    const r = Math.random();
 
     //Square does not belong to an opponent.
     if (this.checkIfBlank(game.world[y][x]) && r > 0.925) return 8;
@@ -41,7 +41,7 @@ class PlayerAI extends Player {
     if (this.checkIfOwnColor(game.world[y][x])) return 1;
 
     //Square belongs to an opponent.
-    let durationQuotient = game.world[y][x].duration / game.maxDuration;
+    const durationQuotient = game.world[y][x].duration / game.maxDuration;
     if (this.checkIfLeadingPlayersColor(game.world[y][x]))
       return 5 + durationQuotient;
     if (this.checkIfOpponentsColor(game.world[y][x]))
@@ -52,11 +52,11 @@ class PlayerAI extends Player {
   //Looks in nextPossibleMoves object
   //and returns the best move (randomly breaks ties)
   determineBestMove() {
-    let valueOfBestMove = maxInArray(Object.values(this.nextPossibleMoves));
-    let bestMoves = ['north', 'east', 'west', 'south', 'stay'].filter(
+    const valueOfBestMove = maxInArray(Object.values(this.nextPossibleMoves));
+    const bestMoves = ['north', 'east', 'west', 'south', 'stay'].filter(
       direction => this.nextPossibleMoves[direction] == valueOfBestMove
     );
-    let r = Math.floor(Math.random() * bestMoves.length);
+    const r = Math.floor(Math.random() * bestMoves.length);
     return bestMoves[r];
   }
 

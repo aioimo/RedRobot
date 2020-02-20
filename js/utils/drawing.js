@@ -28,8 +28,8 @@ function drawQuarterCircle(ctx, x, y, radius, startAngle, color = 'black') {
 
 function drawRoundedBox(ctx, x, y, width, height, radius, color = 'black') {
   ctx.save();
-  let innerHeight = height - 2 * radius;
-  let innerWidth = width - 2 * radius;
+  const innerHeight = height - 2 * radius;
+  const innerWidth = width - 2 * radius;
   ctx.fillStyle = color;
   drawQuarterCircle(ctx, x + radius, y + radius, radius, Math.PI / 2, color);
   drawQuarterCircle(

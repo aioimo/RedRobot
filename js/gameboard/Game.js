@@ -73,7 +73,7 @@ class Game {
   checkSquares() {
     for (let row = 0; row < this.world.length; row++) {
       for (let col = 0; col < this.world.length; col++) {
-        let square = this.world[row][col];
+        const square = this.world[row][col];
         if (square.color != null && square.passable) {
           square.duration++;
           if (square.duration > this.maxDuration) {
@@ -94,7 +94,7 @@ class Game {
 
   moveAllComps() {
     for (let i = 0; i < this.computerPlayers.length; i++) {
-      let comp = this.computerPlayers[i];
+      const comp = this.computerPlayers[i];
       if (comp.connected) {
         comp.lookAround();
         comp.executeMove(comp.determineBestMove());
@@ -108,8 +108,8 @@ class Game {
     });
     for (let row = 0; row < this.world.length; row++) {
       for (let col = 0; col < this.world[row].length; col++) {
-        let color = this.world[row][col].color;
-        let matchingPlayer = this.allPlayers.filter(
+        const color = this.world[row][col].color;
+        const matchingPlayer = this.allPlayers.filter(
           player => player.color === color
         );
         if (matchingPlayer.length > 0) {

@@ -3,7 +3,7 @@ function maxInArray(arr) {
 }
 
 function createGameBoard(n) {
-  let grid = [];
+  const grid = [];
   for (let row = 0; row < n; row++) {
     grid.push([]);
     for (let col = 0; col < n; col++) {

@@ -9,12 +9,12 @@ const recordWinner = () => {
 };
 
 const statistics = winners => {
-  let winCount = {};
+  const winCount = {};
   winners.forEach(winner => {
     if (winCount[winner]) winCount[winner]++;
     else winCount[winner] = 1;
   });
-  let percentage = {};
+  const percentage = {};
   winners.forEach(winner => {
     percentage[winner] =
       Math.round((winCount[winner] / winners.length) * 100) + '%';
